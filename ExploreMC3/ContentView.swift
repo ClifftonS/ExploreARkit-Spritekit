@@ -7,10 +7,18 @@
 
 import SwiftUI
 import RealityKit
+import SceneKit
 
 struct ContentView : View {
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ZStack {
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            VStack{
+                Spacer()
+                SceneView(scene: SCNScene(named: "Canon.usdz"), options: [.autoenablesDefaultLighting, .allowsCameraControl]).frame(width: .infinity, height: UIScreen.main.bounds.height / 4).background(.white.opacity(0.3)).foregroundColor(.white.opacity(0.3)).offset(x: 0, y: 50)
+            }
+            
+        }
     }
 }
 

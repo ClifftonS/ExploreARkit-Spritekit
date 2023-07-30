@@ -12,6 +12,7 @@
 		4E321C222A763D89000B20AB /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C212A763D89000B20AB /* Experience.rcproject */; };
 		4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E321C232A763D8B000B20AB /* Assets.xcassets */; };
 		4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E321C262A763D8B000B20AB /* Preview Assets.xcassets */; };
+		4E321C2F2A76447A000B20AB /* Canon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4E321C2E2A76447A000B20AB /* Canon.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		4E321C212A763D89000B20AB /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		4E321C232A763D8B000B20AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E321C262A763D8B000B20AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4E321C2E2A76447A000B20AB /* Canon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Canon.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
+				4E321C2D2A764463000B20AB /* Model */,
 				4E321C212A763D89000B20AB /* Experience.rcproject */,
 				4E321C232A763D8B000B20AB /* Assets.xcassets */,
 				4E321C252A763D8B000B20AB /* Preview Content */,
@@ -68,6 +71,14 @@
 				4E321C262A763D8B000B20AB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4E321C2D2A764463000B20AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E321C2E2A76447A000B20AB /* Canon.usdz */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E321C2F2A76447A000B20AB /* Canon.usdz in Resources */,
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
 			);
