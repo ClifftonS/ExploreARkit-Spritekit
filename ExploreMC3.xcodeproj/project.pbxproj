@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E246D952A7BCB28009A38C0 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 4E246D942A7BCB28009A38C0 /* FocusEntity */; };
+		4E246D972A7BCF1C009A38C0 /* Dice.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4E246D962A7BCF1C009A38C0 /* Dice.usdz */; };
 		4E321C1E2A763D89000B20AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1D2A763D89000B20AB /* AppDelegate.swift */; };
 		4E321C202A763D89000B20AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1F2A763D89000B20AB /* ContentView.swift */; };
 		4E321C222A763D89000B20AB /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C212A763D89000B20AB /* Experience.rcproject */; };
@@ -18,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E246D962A7BCF1C009A38C0 /* Dice.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Dice.usdz; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E321C1F2A763D89000B20AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E246D952A7BCB28009A38C0 /* FocusEntity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +86,7 @@
 		4E321C2D2A764463000B20AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E246D962A7BCF1C009A38C0 /* Dice.usdz */,
 				4E321C2E2A76447A000B20AB /* Canon.usdz */,
 			);
 			path = Model;
@@ -103,6 +108,9 @@
 			dependencies = (
 			);
 			name = ExploreMC3;
+			packageProductDependencies = (
+				4E246D942A7BCB28009A38C0 /* FocusEntity */,
+			);
 			productName = ExploreMC3;
 			productReference = 4E321C1A2A763D89000B20AB /* ExploreMC3.app */;
 			productType = "com.apple.product-type.application";
@@ -131,6 +139,9 @@
 				Base,
 			);
 			mainGroup = 4E321C112A763D89000B20AB;
+			packageReferences = (
+				4E246D932A7BCB28009A38C0 /* XCRemoteSwiftPackageReference "FocusEntity" */,
+			);
 			productRefGroup = 4E321C1B2A763D89000B20AB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,6 +160,7 @@
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
 				4E321C352A7928A5000B20AB /* ball.reality in Resources */,
+				4E246D972A7BCF1C009A38C0 /* Dice.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +379,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E246D932A7BCB28009A38C0 /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E246D942A7BCB28009A38C0 /* FocusEntity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E246D932A7BCB28009A38C0 /* XCRemoteSwiftPackageReference "FocusEntity" */;
+			productName = FocusEntity;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E321C122A763D89000B20AB /* Project object */;
 }

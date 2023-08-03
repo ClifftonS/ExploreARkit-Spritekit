@@ -112,7 +112,7 @@
                         1
                       ],
                       "identifier" : "3923A9DF-17C8-4452-99AE-669AA86F062A",
-                      "isEnabled" : true,
+                      "isEnabled" : false,
                       "isLooping" : false,
                       "isModal" : false,
                       "name" : "Behavior",
@@ -164,7 +164,7 @@
                           "material",
                           {
                             "typeName" : "String",
-                            "value" : "paintEnamelMatte"
+                            "value" : "standard"
                           }
                         ],
                         [
@@ -172,9 +172,9 @@
                           {
                             "typeName" : "double4",
                             "value" : [
-                              0.17000000178813934,
-                              0.85000002384185791,
-                              0.50999999046325684,
+                              0.55000001192092896,
+                              0.10999999940395355,
+                              0.10999999940395355,
                               1
                             ]
                           }
@@ -200,6 +200,13 @@
                           }
                         ],
                         [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "ball"
+                          }
+                        ],
+                        [
                           "rigidBody-enabled",
                           {
                             "typeName" : "Bool",
@@ -211,7 +218,7 @@
                           {
                             "typeName" : "RigidBodyMaterial",
                             "value" : {
-                              "builtIn" : "wood",
+                              "builtIn" : "plastic",
                               "overrides" : {
 
                               }
@@ -285,9 +292,9 @@
                   0.50186353921890259,
                   0.23449581861495972,
                   0,
-                  0.52321553230285645,
-                  0.31200480461120605,
-                  0.10045365989208221,
+                  8.4834365844726562,
+                  4.9590854644775391,
+                  1.2088789939880371,
                   1
                 ],
                 "sceneTransform" : [
