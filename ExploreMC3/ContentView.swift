@@ -68,6 +68,7 @@ struct ARViewContainer: UIViewRepresentable {
             )
         )
         
+        
 //        let boxAnchor = try! Experience.loadBall()
         // Add the box anchor to the scene
 //        arView.scene.anchors.append(boxAnchor)
@@ -94,7 +95,7 @@ struct ARViewContainer: UIViewRepresentable {
 //            cameraAnchor.addChild(ball)
 //            uiView.scene.addAnchor(cameraAnchor)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //                uiView.scene.removeAnchor(cameraAnchor)
                 taprecog = false
 
@@ -167,7 +168,7 @@ struct ARViewContainer: UIViewRepresentable {
             
             if !tapDetected {
                 let modelEntity1 = try! Boxtumpuk.loadBox()
-                let anchorEntity1 = AnchorEntity(plane: .horizontal)
+                let anchorEntity1 = AnchorEntity()
                 anchorEntity1.addChild(modelEntity1)
                 view.scene.addAnchor(anchorEntity1)
                 tapDetected = true

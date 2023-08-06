@@ -32,13 +32,13 @@
                                       "configurationBox" : {
                                         "configuration" : {
                                           "angularCoefficient" : 1,
-                                          "duration" : 1.0171546936035156,
+                                          "duration" : 1.2200000286102295,
                                           "isTransformInitKeyPath" : true,
                                           "linearCoefficient" : 1,
                                           "location" : [
                                             0,
                                             0,
-                                            -1
+                                            -0.30000001192092896
                                           ],
                                           "moveEase" : "easeIn",
                                           "respectPhysics" : false,
@@ -78,7 +78,7 @@
                                           "animationStyle" : "basic",
                                           "buildOutAnimationType" : "none",
                                           "distance" : 1,
-                                          "duration" : 1.3530040979385376,
+                                          "duration" : 3,
                                           "fadeOut" : true,
                                           "linearCoefficient" : 1,
                                           "moveEase" : "easeInOut",
@@ -241,7 +241,7 @@
                           "diameter",
                           {
                             "typeName" : "Double",
-                            "value" : 0.047044184726426616
+                            "value" : 0.04704418472642663
                           }
                         ],
                         [
@@ -364,21 +364,21 @@
               "title" : "ball",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.27111008763313293,
+                  0.99617475271224976,
                   4.8780246508783875e-09,
-                  -0.96254831552505493,
+                  -0.087383143603801727,
                   0,
-                  -0.48306792974472046,
+                  -0.043854352086782455,
                   0.86494684219360352,
-                  -0.13606032729148865,
+                  -0.49994385242462158,
                   0,
-                  0.8325532078742981,
-                  0.50186353921890259,
-                  0.23449581861495972,
+                  0.075581818819046021,
+                  0.50186347961425781,
+                  0.86163830757141113,
                   0,
-                  8.4834365844726562,
-                  4.9590854644775391,
-                  1.2088789939880371,
+                  -0.024141877889633179,
+                  0.74753302335739136,
+                  1.2841060161590576,
                   1
                 ],
                 "sceneTransform" : [
