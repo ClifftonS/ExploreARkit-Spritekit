@@ -32,13 +32,13 @@
                                       "configurationBox" : {
                                         "configuration" : {
                                           "angularCoefficient" : 1,
-                                          "duration" : 0.89999997615814209,
+                                          "duration" : 1.0171546936035156,
                                           "isTransformInitKeyPath" : true,
                                           "linearCoefficient" : 1,
                                           "location" : [
                                             0,
-                                            -1,
-                                            0
+                                            0,
+                                            -1
                                           ],
                                           "moveEase" : "easeIn",
                                           "respectPhysics" : false,
@@ -78,7 +78,7 @@
                                           "animationStyle" : "basic",
                                           "buildOutAnimationType" : "none",
                                           "distance" : 1,
-                                          "duration" : 1,
+                                          "duration" : 1.3530040979385376,
                                           "fadeOut" : true,
                                           "linearCoefficient" : 1,
                                           "moveEase" : "easeInOut",
@@ -136,6 +136,90 @@
                     }
                   ],
                   "__version" : 3
+                },
+                {
+                  "__content" : [
+                    {
+                      "accessibility" : {
+                        "__content" : [
+                          {
+                            "isEnabled" : false
+                          }
+                        ],
+                        "__version" : 1
+                      },
+                      "actionGroups" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurations" : [
+                                {
+                                  "__content" : [
+                                    {
+                                      "configurationBox" : {
+                                        "configuration" : {
+                                          "angularCoefficient" : 1,
+                                          "animationStyle" : "basic",
+                                          "buildOutAnimationType" : "none",
+                                          "distance" : 1,
+                                          "duration" : 1.4116452932357788,
+                                          "fadeOut" : true,
+                                          "linearCoefficient" : 1,
+                                          "moveEase" : "easeInOut",
+                                          "respectPhysics" : false,
+                                          "target" : [
+                                            "FD774BCD-9C96-4AB8-A5AF-40ABE4472131"
+                                          ]
+                                        },
+                                        "name" : {
+                                          "type" : "hide"
+                                        }
+                                      },
+                                      "identifier" : "F651B048-F1DA-487B-A9D6-90F1BF1E0257",
+                                      "isEnabled" : true
+                                    }
+                                  ],
+                                  "__version" : 1
+                                }
+                              ],
+                              "identifier" : "DC154ACC-156E-440C-9701-A089762570B0",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ],
+                      "color" : [
+                        0.21568627655506134,
+                        0.72549021244049072,
+                        0.80000001192092896,
+                        1
+                      ],
+                      "identifier" : "0BB13FE6-B097-49CD-9D41-857C4BA1BCCD",
+                      "isEnabled" : false,
+                      "isLooping" : false,
+                      "isModal" : false,
+                      "name" : "Behavior 1",
+                      "triggers" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurationBox" : {
+                                "configuration" : {
+
+                                },
+                                "name" : "start"
+                              },
+                              "identifier" : "5900B499-3747-4A19-9BEA-CFE777EB2271",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ]
+                    }
+                  ],
+                  "__version" : 3
                 }
               ],
               "gravity" : [
@@ -144,7 +228,7 @@
                 0
               ],
               "identifier" : "F9610871-0955-494F-A5C3-51D1A281BAB3",
-              "material" : "rubber",
+              "material" : "wood",
               "overrides" : {
                 "children" : {
                   "4A213441-135C-450E-8EF8-1A4EAB267C1D" : null,
@@ -157,7 +241,7 @@
                           "diameter",
                           {
                             "typeName" : "Double",
-                            "value" : 0.10000000000000001
+                            "value" : 0.047044184726426616
                           }
                         ],
                         [
@@ -218,7 +302,7 @@
                           {
                             "typeName" : "RigidBodyMaterial",
                             "value" : {
-                              "builtIn" : "plastic",
+                              "builtIn" : "wood",
                               "overrides" : {
 
                               }
@@ -248,15 +332,15 @@
                         0,
                         0,
                         0,
-                        0.99999988079071045,
+                        1,
                         0,
                         0,
-                        0,
-                        0,
-                        0.99999988079071045,
                         0,
                         0,
                         1,
+                        0,
+                        0,
+                        0,
                         0,
                         1
                       ]
