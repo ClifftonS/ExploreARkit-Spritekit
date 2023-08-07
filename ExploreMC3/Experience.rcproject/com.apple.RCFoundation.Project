@@ -32,15 +32,15 @@
                                       "configurationBox" : {
                                         "configuration" : {
                                           "angularCoefficient" : 1,
-                                          "duration" : 1.2200000286102295,
+                                          "duration" : 1.9643714427947998,
                                           "isTransformInitKeyPath" : true,
                                           "linearCoefficient" : 1,
                                           "location" : [
                                             0,
                                             0,
-                                            -0.30000001192092896
+                                            -1
                                           ],
-                                          "moveEase" : "easeIn",
+                                          "moveEase" : "none",
                                           "respectPhysics" : false,
                                           "scale" : 0.004999999888241291,
                                           "target" : [
@@ -158,31 +158,27 @@
                                     {
                                       "configurationBox" : {
                                         "configuration" : {
-                                          "angularCoefficient" : 1,
-                                          "animationStyle" : "basic",
-                                          "buildOutAnimationType" : "none",
-                                          "distance" : 1,
-                                          "duration" : 1.4116452932357788,
-                                          "fadeOut" : true,
-                                          "linearCoefficient" : 1,
-                                          "moveEase" : "easeInOut",
-                                          "respectPhysics" : false,
+                                          "force" : [
+                                            0,
+                                            1.8891282081604004,
+                                            -7.050323486328125
+                                          ],
                                           "target" : [
                                             "FD774BCD-9C96-4AB8-A5AF-40ABE4472131"
                                           ]
                                         },
                                         "name" : {
-                                          "type" : "hide"
+                                          "type" : "physics"
                                         }
                                       },
-                                      "identifier" : "F651B048-F1DA-487B-A9D6-90F1BF1E0257",
+                                      "identifier" : "CCB649F7-7E22-47B0-BC9E-5AE1BCD984B5",
                                       "isEnabled" : true
                                     }
                                   ],
                                   "__version" : 1
                                 }
                               ],
-                              "identifier" : "DC154ACC-156E-440C-9701-A089762570B0",
+                              "identifier" : "9ED7080D-3B62-4689-A68E-E8CB3E46D0B8",
                               "isEnabled" : true
                             }
                           ],
@@ -195,7 +191,7 @@
                         0.80000001192092896,
                         1
                       ],
-                      "identifier" : "0BB13FE6-B097-49CD-9D41-857C4BA1BCCD",
+                      "identifier" : "F0532D62-85C0-449C-B28C-19D1B0440ADA",
                       "isEnabled" : false,
                       "isLooping" : false,
                       "isModal" : false,
@@ -206,11 +202,13 @@
                             {
                               "configurationBox" : {
                                 "configuration" : {
-
+                                  "target" : [
+                                    "FD774BCD-9C96-4AB8-A5AF-40ABE4472131"
+                                  ]
                                 },
-                                "name" : "start"
+                                "name" : "tapTarget"
                               },
-                              "identifier" : "5900B499-3747-4A19-9BEA-CFE777EB2271",
+                              "identifier" : "56839A80-58AA-4CD8-AF4A-A30BA3E9E994",
                               "isEnabled" : true
                             }
                           ],
@@ -364,21 +362,21 @@
               "title" : "ball",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.99617475271224976,
-                  4.8780246508783875e-09,
-                  -0.087383143603801727,
+                  0.54690390825271606,
+                  2.8316955447138525e-09,
+                  -0.83719533681869507,
                   0,
-                  -0.043854352086782455,
-                  0.86494684219360352,
-                  -0.49994385242462158,
+                  -0.23148937523365021,
+                  0.96101218461990356,
+                  -0.15122219920158386,
                   0,
-                  0.075581818819046021,
-                  0.50186347961425781,
-                  0.86163830757141113,
+                  0.80455499887466431,
+                  0.27650567889213562,
+                  0.52558141946792603,
                   0,
-                  -0.024141877889633179,
-                  0.74753302335739136,
-                  1.2841060161590576,
+                  1.3941590785980225,
+                  0.33724266290664673,
+                  0.79898554086685181,
                   1
                 ],
                 "sceneTransform" : [
