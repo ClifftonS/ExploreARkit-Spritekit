@@ -142,7 +142,7 @@ struct ARViewContainer: UIViewRepresentable {
             }
             if taprecog == true{
                 for anchor in anchors {
-                    if let anchorName = anchor.name, anchorName == "ball3" {
+                    if let anchorName = anchor.name, anchorName == "ball2" {
                         placeObject(named: anchorName, for: anchor)
                     }
 //                    if let participantAnchor = anchor as? ARParticipantAnchor {
@@ -167,16 +167,16 @@ struct ARViewContainer: UIViewRepresentable {
             guard let view = self.view, let focusEntity = self.focusEntity else { return }
             
             if !tapDetected {
-//                let modelEntity = try! Boxtumpuk.loadBox()
-//                let anchorEntity = AnchorEntity()
-//                anchorEntity.addChild(modelEntity)
-//                view.scene.addAnchor(anchorEntity)
+                let modelEntity = try! Boxtumpuk.loadBox()
+                let anchorEntity = AnchorEntity()
+                anchorEntity.addChild(modelEntity)
+                view.scene.addAnchor(anchorEntity)
                 tapDetected = true
                 focusEntity.removeFromParent()
             } else {
                 if taprecog == false {
                     
-                    let anchor = ARAnchor(name: "ball3", transform: view.cameraTransform.matrix)
+                    let anchor = ARAnchor(name: "ball2", transform: view.cameraTransform.matrix)
                     view.session.add(anchor: anchor)
                     taprecog = true
                 }
