@@ -32,6 +32,9 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         config.environmentTexturing = .automatic
 //        config.isCollaborationEnabled = true
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
+            config.sceneReconstruction = .mesh
+        }
         session.run(config)
         
 //        sessionIDObservation = observe(\.arView.session.indentifier, option: [.new]) { object, change
