@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221BA5082A82730A00A81317 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA5062A82730A00A81317 /* Main.storyboard */; };
+		221BA5092A82730A00A81317 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221BA5072A82730A00A81317 /* LaunchScreen.storyboard */; };
 		4E321C1E2A763D89000B20AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1D2A763D89000B20AB /* AppDelegate.swift */; };
 		4E321C202A763D89000B20AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1F2A763D89000B20AB /* ContentView.swift */; };
 		4E321C222A763D89000B20AB /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C212A763D89000B20AB /* Experience.rcproject */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221BA5062A82730A00A81317 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		221BA5072A82730A00A81317 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22BA523D2A825FAD00F970D1 /* cannonBall.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = cannonBall.reality; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				22BA523D2A825FAD00F970D1 /* cannonBall.reality */,
 				4E321C212A763D89000B20AB /* Experience.rcproject */,
 				4E321C232A763D8B000B20AB /* Assets.xcassets */,
+				221BA5072A82730A00A81317 /* LaunchScreen.storyboard */,
+				221BA5062A82730A00A81317 /* Main.storyboard */,
 				4E321C252A763D8B000B20AB /* Preview Content */,
 			);
 			path = ExploreMC3;
@@ -130,6 +136,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221BA5082A82730A00A81317 /* Main.storyboard in Resources */,
+				221BA5092A82730A00A81317 /* LaunchScreen.storyboard in Resources */,
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
 			);
@@ -273,7 +281,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ExploreMC3/Preview Content\"";
-				DEVELOPMENT_TEAM = G62A2BCNU5;
+				DEVELOPMENT_TEAM = R7J9JSF7ZC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -305,7 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ExploreMC3/Preview Content\"";
-				DEVELOPMENT_TEAM = G62A2BCNU5;
+				DEVELOPMENT_TEAM = R7J9JSF7ZC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
