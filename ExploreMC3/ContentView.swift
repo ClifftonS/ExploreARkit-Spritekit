@@ -54,7 +54,7 @@ extension ARView {
         
         if let firstResult = results.first {
             // Add an ARAnchor at the touch location with a special name you check later in `session(_:didAdd:)`.
-            let anchor = ARAnchor(name: "ball", transform: firstResult.worldTransform)
+            let anchor = ARAnchor(name: "ball5", transform: firstResult.worldTransform)
             self.session.add(anchor: anchor)
         } else {
             print("Warning: Object placement failed.")
@@ -62,10 +62,10 @@ extension ARView {
     }
     
     func placeSceneObject(named entityName: String, for anchor: ARAnchor){
-        let entity = try! ModelEntity.loadModel(named: entityName)
+        let entity = try! ModelEntity.load(named: entityName)
         
         entity.generateCollisionShapes(recursive: true)
-        self.installGestures([.all], for: entity)
+//        entity.installGestures([.rotation,.scale], for: entity)
         
         let anchorEntity = AnchorEntity(anchor: anchor)
         anchorEntity.addChild(entity)
@@ -100,7 +100,7 @@ extension ARViewContainer {
                     
                     self.parent.vm.arView.scene.addAnchor(anchorEntity)
                 } else {
-                    if let anchorName = anchor.name, anchorName == "ball"{
+                    if let anchorName = anchor.name, anchorName == "ball5"{
                         self.parent.vm.arView.placeSceneObject(named: anchorName, for: anchor)
                     }
                 }
