@@ -21,6 +21,7 @@
 		4E246DA82A81D748009A38C0 /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
 		4E246DAA2A81D776009A38C0 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
 		4E246DAE2A81EB16009A38C0 /* ball5.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball5.reality; sourceTree = "<group>"; };
+		4E246DB02A81EF0E009A38C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E321C1F2A763D89000B20AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		4E321C1C2A763D89000B20AB /* ExploreMC3 */ = {
 			isa = PBXGroup;
 			children = (
+				4E246DB02A81EF0E009A38C0 /* Info.plist */,
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
 				4E246DA82A81D748009A38C0 /* MultipeerSession.swift */,
@@ -286,7 +288,9 @@
 				DEVELOPMENT_TEAM = G62A2BCNU5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExploreMC3/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Need to use local network for multipeer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -317,7 +321,9 @@
 				DEVELOPMENT_TEAM = G62A2BCNU5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExploreMC3/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Need to use local network for multipeer";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
