@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22BA523D2A825FAD00F970D1 /* cannonBall.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = cannonBall.reality; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E321C1F2A763D89000B20AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +56,7 @@
 			children = (
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
+				22BA523D2A825FAD00F970D1 /* cannonBall.reality */,
 				4E321C212A763D89000B20AB /* Experience.rcproject */,
 				4E321C232A763D8B000B20AB /* Assets.xcassets */,
 				4E321C252A763D8B000B20AB /* Preview Content */,
@@ -275,6 +277,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -306,6 +309,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;

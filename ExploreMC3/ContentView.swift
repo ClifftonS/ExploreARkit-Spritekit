@@ -1,43 +1,69 @@
-//
-//  ContentView.swift
-//  ExploreMC3
-//
-//  Created by Cliffton S on 30/07/23.
-//
-
-import SwiftUI
+//import SwiftUI
 import RealityKit
+import ARKit
+import UIKit
 
-struct ContentView : View {
-    var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+//struct ContentView : View {
+//    var body: some View {
+//        ARViewContainer().edgesIgnoringSafeArea(.all)
+//    }
+//}
+
+class ViewController: UIViewController {
+    
+    @IBOutlet var arView: ARView!
+    
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        
+        setupARView()
+        
+        arView.session.delegate = self
+        
+        let tapGestureRognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        arView.addGestureRecognizer(tapGestureRognizer)
+    }
+    
+    func setupARView(){
+        arView.automaticallyConfigureSession = false
+        
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal, .vertical]
+        config.environmentTexturing = .automatic
+        
+        arView.session.run(config)
+    }
+    
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer){
+        let anchor = ARAnchor(name: "cannonBall", transform: arView!.cameraTransform.matrix)
+        arView.session.add(anchor: anchor)
+    }
+    
+    func placeObject(named entityName: String, for anchor: ARAnchor){
+        let cannonEntity = try! ModelEntity.load(named: entityName)
+        let anchorEntity = try! AnchorEntity(anchor: anchor)
+        anchorEntity.addChild(cannonEntity)
+        arView.scene.addAnchor(anchorEntity)
     }
 }
 
-struct ARViewContainer: UIViewRepresentable {
-    
-    func makeUIView(context: Context) -> ARView {
-        
-        let arView = ARView(frame: .zero)
-        
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
-        
-        return arView
-        
+extension ViewController: ARSessionDelegate{
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]){
+        for anchor in anchors {
+            if let anchorName = anchor.name, anchorName == "cannonBall"{
+                placeObject(named: anchorName, for: anchor)
+            }
+        }
     }
-    
-    func updateUIView(_ uiView: ARView, context: Context) {}
-    
 }
-
+                        
+                                
+                                
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews : PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
 #endif
