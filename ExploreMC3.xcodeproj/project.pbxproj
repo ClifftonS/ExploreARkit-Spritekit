@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E15AB342A81FC83001FF059 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15AB332A81FC83001FF059 /* StartView.swift */; };
 		4E246DA92A81D748009A38C0 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E246DA82A81D748009A38C0 /* MultipeerSession.swift */; };
 		4E246DAB2A81D776009A38C0 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E246DAA2A81D776009A38C0 /* ARViewModel.swift */; };
 		4E246DAF2A81EB16009A38C0 /* ball5.reality in Resources */ = {isa = PBXBuildFile; fileRef = 4E246DAE2A81EB16009A38C0 /* ball5.reality */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E15AB332A81FC83001FF059 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		4E246DA82A81D748009A38C0 /* MultipeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
 		4E246DAA2A81D776009A38C0 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
 		4E246DAE2A81EB16009A38C0 /* ball5.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball5.reality; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				4E246DB02A81EF0E009A38C0 /* Info.plist */,
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
+				4E15AB332A81FC83001FF059 /* StartView.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
 				4E246DA82A81D748009A38C0 /* MultipeerSession.swift */,
 				4E246DAA2A81D776009A38C0 /* ARViewModel.swift */,
@@ -155,6 +158,7 @@
 				4E246DAB2A81D776009A38C0 /* ARViewModel.swift in Sources */,
 				4E246DA92A81D748009A38C0 /* MultipeerSession.swift in Sources */,
 				4E321C202A763D89000B20AB /* ContentView.swift in Sources */,
+				4E15AB342A81FC83001FF059 /* StartView.swift in Sources */,
 				4E321C1E2A763D89000B20AB /* AppDelegate.swift in Sources */,
 				4E321C222A763D89000B20AB /* Experience.rcproject in Sources */,
 			);
