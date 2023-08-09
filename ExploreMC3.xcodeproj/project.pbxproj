@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E15AB4C2A83B614001FF059 /* ball6.reality in Resources */ = {isa = PBXBuildFile; fileRef = 4E15AB4B2A83B614001FF059 /* ball6.reality */; };
 		4E246D952A7BCB28009A38C0 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 4E246D942A7BCB28009A38C0 /* FocusEntity */; };
 		4E246D972A7BCF1C009A38C0 /* Dice.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4E246D962A7BCF1C009A38C0 /* Dice.usdz */; };
 		4E246D9A2A7E8E10009A38C0 /* MultipeerSession in Frameworks */ = {isa = PBXBuildFile; productRef = 4E246D992A7E8E10009A38C0 /* MultipeerSession */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E15AB4B2A83B614001FF059 /* ball6.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball6.reality; sourceTree = "<group>"; };
 		4E246D962A7BCF1C009A38C0 /* Dice.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Dice.usdz; sourceTree = "<group>"; };
 		4E246DA22A814CF4009A38C0 /* ball2.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball2.reality; sourceTree = "<group>"; };
 		4E246DA62A815140009A38C0 /* ball3.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball3.reality; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
 				4E246DA22A814CF4009A38C0 /* ball2.reality */,
+				4E15AB4B2A83B614001FF059 /* ball6.reality */,
 				4E246DA62A815140009A38C0 /* ball3.reality */,
 				4E321C2D2A764463000B20AB /* Model */,
 				4E321C212A763D89000B20AB /* Experience.rcproject */,
@@ -165,6 +168,7 @@
 			files = (
 				4E321C2F2A76447A000B20AB /* Canon.usdz in Resources */,
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
+				4E15AB4C2A83B614001FF059 /* ball6.reality in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
 				4E246DA32A814CF4009A38C0 /* ball2.reality in Resources */,
 				4E246D972A7BCF1C009A38C0 /* Dice.usdz in Resources */,

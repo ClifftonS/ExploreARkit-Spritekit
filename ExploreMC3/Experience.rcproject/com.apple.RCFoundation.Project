@@ -218,6 +218,95 @@
                     }
                   ],
                   "__version" : 3
+                },
+                {
+                  "__content" : [
+                    {
+                      "accessibility" : {
+                        "__content" : [
+                          {
+                            "isEnabled" : false
+                          }
+                        ],
+                        "__version" : 1
+                      },
+                      "actionGroups" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurations" : [
+                                {
+                                  "__content" : [
+                                    {
+                                      "configurationBox" : {
+                                        "configuration" : {
+                                          "angularCoefficient" : 1,
+                                          "duration" : 1,
+                                          "isTransformInitKeyPath" : true,
+                                          "linearCoefficient" : 1,
+                                          "location" : [
+                                            0,
+                                            -0.10000000149011612,
+                                            -0.15000000596046448
+                                          ],
+                                          "moveEase" : "none",
+                                          "respectPhysics" : false,
+                                          "target" : [
+                                            "FD774BCD-9C96-4AB8-A5AF-40ABE4472131"
+                                          ]
+                                        },
+                                        "name" : {
+                                          "arguments" : "absolute",
+                                          "type" : "transform"
+                                        }
+                                      },
+                                      "identifier" : "D9E60CBC-237A-4D14-971D-99FEC54798FF",
+                                      "isEnabled" : true
+                                    }
+                                  ],
+                                  "__version" : 1
+                                }
+                              ],
+                              "identifier" : "774876B2-BD87-4250-AE95-25329CE6BB88",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ],
+                      "color" : [
+                        0.49019607901573181,
+                        0.7450980544090271,
+                        0.94901961088180542,
+                        1
+                      ],
+                      "identifier" : "D4F90295-09BD-44F4-B974-BC94178D1CB3",
+                      "isEnabled" : false,
+                      "isLooping" : false,
+                      "isModal" : false,
+                      "name" : "Behavior 2",
+                      "triggers" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurationBox" : {
+                                "configuration" : {
+                                  "target" : [
+                                    "FD774BCD-9C96-4AB8-A5AF-40ABE4472131"
+                                  ]
+                                },
+                                "name" : "tapTarget"
+                              },
+                              "identifier" : "2935B984-4C79-42C7-82E3-E5F157910F80",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ]
+                    }
+                  ],
+                  "__version" : 3
                 }
               ],
               "gravity" : [
@@ -338,8 +427,8 @@
                         1,
                         0,
                         0,
-                        0.40000000596046448,
-                        0,
+                        -0.05000000074505806,
+                        -0.15000000596046448,
                         1
                       ]
                     }
@@ -362,21 +451,21 @@
               "title" : "ball",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.54690390825271606,
-                  2.8316955447138525e-09,
-                  -0.83719533681869507,
+                  0.973793625831604,
+                  -1.806699145845414e-08,
+                  -0.22743338346481323,
                   0,
-                  -0.23148937523365021,
-                  0.96101218461990356,
-                  -0.15122219920158386,
+                  -0.10514302551746368,
+                  0.88672220706939697,
+                  -0.45018735527992249,
                   0,
-                  0.80455499887466431,
-                  0.27650567889213562,
-                  0.52558141946792603,
+                  0.20167022943496704,
+                  0.46230259537696838,
+                  0.86348444223403931,
                   0,
-                  2.6273112297058105,
-                  0.63553822040557861,
-                  1.5056986808776855,
+                  0.66424596309661865,
+                  1.0044543743133545,
+                  1.3799173831939697,
                   1
                 ],
                 "sceneTransform" : [
