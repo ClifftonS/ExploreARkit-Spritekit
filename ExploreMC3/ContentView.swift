@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     func placeObject(named entityName: String, for anchor: ARAnchor){
         let cannonEntity = try! ModelEntity.load(named: entityName)
-        let anchorEntity = AnchorEntity()
+        let anchorEntity = AnchorEntity(anchor: anchor)
         anchorEntity.addChild(cannonEntity)
         arView.scene.addAnchor(anchorEntity)
     }
