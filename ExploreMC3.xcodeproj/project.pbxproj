@@ -20,6 +20,7 @@
 		4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E321C262A763D8B000B20AB /* Preview Assets.xcassets */; };
 		4E321C2F2A76447A000B20AB /* Canon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4E321C2E2A76447A000B20AB /* Canon.usdz */; };
 		4E321C372A79F866000B20AB /* boxtumpuk.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C362A79F13A000B20AB /* boxtumpuk.rcproject */; };
+		4ED4736E2A84B24B00A049C2 /* bolamelompat.reality in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4736D2A84B24B00A049C2 /* bolamelompat.reality */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		4E321C262A763D8B000B20AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4E321C2E2A76447A000B20AB /* Canon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Canon.usdz; sourceTree = "<group>"; };
 		4E321C362A79F13A000B20AB /* boxtumpuk.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = boxtumpuk.rcproject; sourceTree = "<group>"; };
+		4ED4736D2A84B24B00A049C2 /* bolamelompat.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = bolamelompat.reality; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		4E321C1C2A763D89000B20AB /* ExploreMC3 */ = {
 			isa = PBXGroup;
 			children = (
+				4ED4736D2A84B24B00A049C2 /* bolamelompat.reality */,
 				4E321C1D2A763D89000B20AB /* AppDelegate.swift */,
 				4E321C1F2A763D89000B20AB /* ContentView.swift */,
 				4E246DA22A814CF4009A38C0 /* ball2.reality */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E321C2F2A76447A000B20AB /* Canon.usdz in Resources */,
+				4ED4736E2A84B24B00A049C2 /* bolamelompat.reality in Resources */,
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				4E15AB4C2A83B614001FF059 /* ball6.reality in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,

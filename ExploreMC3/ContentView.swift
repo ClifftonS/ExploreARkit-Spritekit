@@ -125,7 +125,8 @@ struct ARViewContainer: UIViewRepresentable {
         weak var view: ARView?
         var focusEntity: FocusEntity?
         var tapDetected = false
-        var ballEntity: ModelEntity!
+        var bolla: Entity!
+        var originalPosition: SIMD3<Float>!
         @Binding var taprecog: Bool
 //        @Binding var transform: simd_float4x4
 //        init(taprecog: Binding<Bool>, transform: Binding<simd_float4x4>) { // Add this initializer
@@ -146,7 +147,7 @@ struct ARViewContainer: UIViewRepresentable {
             }
             if taprecog == true{
                 for anchor in anchors {
-                    if let anchorName = anchor.name, anchorName == "ball6" {
+                    if let anchorName = anchor.name, anchorName == "bolamelompat" {
                         placeObject(named: anchorName, for: anchor)
                     }
 //                    if let participantAnchor = anchor as? ARParticipantAnchor {
@@ -171,19 +172,49 @@ struct ARViewContainer: UIViewRepresentable {
             guard let view = self.view, let focusEntity = self.focusEntity else { return }
             
             if !tapDetected {
+                let modelEntity = try! Boxtumpuk.loadBox()
+                bolla = modelEntity.bolla
+                originalPosition = bolla.position
+                print("posisiawl \(originalPosition)")
 //                let modelEntity = try! Boxtumpuk.loadBox()
-//                let anchorEntity = AnchorEntity()
-//                anchorEntity.addChild(modelEntity)
-//                view.scene.addAnchor(anchorEntity)
+                let anchorEntity = AnchorEntity()
+                anchorEntity.addChild(modelEntity)
+                view.scene.addAnchor(anchorEntity)
+                let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+                        view.addGestureRecognizer(panGesture)
                 tapDetected = true
                 focusEntity.removeFromParent()
             } else {
-                if taprecog == false {
-                    
-                    let anchor = ARAnchor(name: "ball6", transform: view.cameraTransform.matrix)
-                    view.session.add(anchor: anchor)
-                    taprecog = true
-                }
+//                let ballMesh = MeshResource.generateSphere(radius: 0.1)
+//                                   let ballMaterial = SimpleMaterial(color: .red, isMetallic: false)
+//                                   let ballModel = ModelEntity(mesh: ballMesh, materials: [ballMaterial])
+//
+//                                   // Create physics body for collision
+//                                   let ballPhysicsShape = ShapeResource.generateSphere(radius: 0.1)
+//
+//                           ballModel.physicsBody = PhysicsBodyComponent(
+//                               massProperties: .init(shape: ballPhysicsShape, mass: 0.5),
+//                               material: nil,
+//                               mode: .dynamic
+//                           )
+//
+//
+//
+//
+//                let anchorEntity = AnchorEntity(plane: .horizontal)
+//                           view.scene.addAnchor(anchorEntity)
+//
+//                           anchorEntity.addChild(ballModel)
+//                           ballEntity = ballModel
+//
+//                           let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//                           view.addGestureRecognizer(panGesture)
+//                if taprecog == false {
+//
+//                    let anchor = ARAnchor(name: "bolamelompat", transform: view.cameraTransform.matrix)
+//                    view.session.add(anchor: anchor)
+//                    taprecog = true
+//                }
             }
             // Create a new anchor to add content to
 //            let anchor = AnchorEntity()
@@ -225,33 +256,79 @@ struct ARViewContainer: UIViewRepresentable {
         }
         func placeObject(named entityName: String, for anchor: ARAnchor){
             guard let view = self.view else { return }
-            ballEntity = try! ModelEntity.load(named: entityName) as! ModelEntity
+            let ballEntity = try! ModelEntity.load(named: entityName)
+            let anchorsEntity = AnchorEntity(anchor: anchor)
+            let modelEntity = try! Boxtumpuk.loadBox()
+            anchorsEntity.addChild(ballEntity)
+            view.scene.addAnchor(anchorsEntity)
+//            let ballMesh = MeshResource.generateSphere(radius: 0.1)
+//                    let ballMaterial = SimpleMaterial(color: .red, isMetallic: false)
+//                    let ballModel = ModelEntity(mesh: ballMesh, materials: [ballMaterial])
+//
+//                    // Create physics body for collision
+//                    let ballPhysicsShape = ShapeResource.generateSphere(radius: 0.1)
+//
+//            ballModel.physicsBody = PhysicsBodyComponent(
+//                massProperties: .init(shape: ballPhysicsShape, mass: 0.5),
+//                material: nil,
+//                mode: .dynamic
+//            )
+                    
+                    
+                    
+                    
+//            let anchorEntity = AnchorEntity(anchor: anchor)
+//            view.scene.addAnchor(anchorEntity)
+//            let position = SIMD3<Float>(0, -0.2, -0.6) // -10 cm in meters
+//                    ballModel.position = position
+//            anchorEntity.addChild(ballModel)
+//            ballEntity = ballModel
             
-            let anchorEntity = AnchorEntity(anchor: anchor)
-            anchorEntity.addChild(ballEntity)
-            view.scene.addAnchor(anchorEntity)
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-            view.addGestureRecognizer(panGesture)
+//            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//            view.addGestureRecognizer(panGesture)
+//            let modelEntity = try! Boxtumpuk.loadBola()
+//            let anchorsEntity = AnchorEntity()
+//            anchorsEntity.addChild(modelEntity)
+//            view.scene.addAnchor(anchorsEntity)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                view.scene.removeAnchor(anchorEntity)
-
-            }
         }
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let view = self.view else { return }
             var translation = gesture.translation(in: view)
+//            let location = gesture.location(in: view)
+            
+            if gesture.state == .began{
+                //                if let hitEntity = view.entity(at: location), hitEntity == bolla {
                 
-                if gesture.state == .changed {
-                    // Get the translation of the gesture in the ARView's coordinate system
-                    translation = gesture.translation(in: view)
-                } else if gesture.state == .ended {
-                    translation = gesture.translation(in: view)
-                    print("Float translation x \(-Float(translation.x) * 0.0001)")
-                    print("Float translation y \(-Float(translation.y) * 0.0001)")
-                    ballEntity.applyLinearImpulse([-Float(translation.x) * 0.0001, 0, -Float(translation.y) * 0.0001], relativeTo: ballEntity.parent)
-                }
+                //                                isPanning = true
+                //                            }
             }
+            else if gesture.state == .changed {
+                // Get the translation of the gesture in the ARView's coordinate system
+                translation = gesture.translation(in: view)
+            } else if gesture.state == .ended {
+                print("Float translation x \(-Float(translation.x) * 0.0001)")
+                print("Float translation y \(-Float(translation.y) * 0.0001)")
+                if let physicsEntity = bolla as? Entity & HasPhysics {
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0005, 0.01, -Float(translation.y) * 0.0005], relativeTo: physicsEntity.parent)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        self.bolla.position = self.originalPosition
+                        print("posisiakr2 \(self.bolla.position)")
+                    }
+                    print("posisiakr \(self.bolla.position)")
+                }
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+//                    self?.bolla.position = self?.originalPosition ?? .zero
+//                    print("posisiakr \(self?.bolla.position)")
+//                }
+//                {
+//                    bolla.position = self.originalPosition
+//
+//                    print("posisiakr \(bolla.position)")
+//                }
+            }
+            
+        }
     }
     
 }
