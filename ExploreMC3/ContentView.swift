@@ -126,6 +126,7 @@ struct ARViewContainer: UIViewRepresentable {
         var focusEntity: FocusEntity?
         var tapDetected = false
         var bolla: Entity!
+        var anchorEntity: AnchorEntity!
         var originalPosition: SIMD3<Float>!
         @Binding var taprecog: Bool
 //        @Binding var transform: simd_float4x4
@@ -173,12 +174,16 @@ struct ARViewContainer: UIViewRepresentable {
             
             if !tapDetected {
                 let modelEntity = try! Boxtumpuk.loadBox()
-                bolla = modelEntity.bolla
-                originalPosition = bolla.position
-                print("posisiawl \(originalPosition)")
+//                bolla = modelEntity.bolla
+//                originalPosition = bolla.position
+//                print("posisiawl \(originalPosition)")
 //                let modelEntity = try! Boxtumpuk.loadBox()
-                let anchorEntity = AnchorEntity()
+                let modelBola = try! Boxtumpuk.loadBola()
+                bolla = modelBola.bolla
+                originalPosition = bolla.position
+                anchorEntity = AnchorEntity(plane: .horizontal)
                 anchorEntity.addChild(modelEntity)
+                anchorEntity.addChild(modelBola)
                 view.scene.addAnchor(anchorEntity)
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
                         view.addGestureRecognizer(panGesture)
@@ -295,7 +300,11 @@ struct ARViewContainer: UIViewRepresentable {
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let view = self.view else { return }
             var translation = gesture.translation(in: view)
-//            let location = gesture.location(in: view)
+            let location = gesture.location(in: view)
+            let locationVector = SIMD3<Float>(Float(location.x), Float(location.y), 0)
+                
+                // Calculate the distance between gesture location and bolla's position
+                let distance = simd_distance(locationVector, bolla.position)
             
             if gesture.state == .began{
                 //                if let hitEntity = view.entity(at: location), hitEntity == bolla {
@@ -305,18 +314,28 @@ struct ARViewContainer: UIViewRepresentable {
             }
             else if gesture.state == .changed {
                 // Get the translation of the gesture in the ARView's coordinate system
-                translation = gesture.translation(in: view)
+                
+                    translation = gesture.translation(in: view)
+                
+                
             } else if gesture.state == .ended {
                 print("Float translation x \(-Float(translation.x) * 0.0001)")
                 print("Float translation y \(-Float(translation.y) * 0.0001)")
-                if let physicsEntity = bolla as? Entity & HasPhysics {
+                print("Float translation z \(distance)")
+                
+                    if let physicsEntity = bolla as? Entity & HasPhysics {
                     physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0005, 0.01, -Float(translation.y) * 0.0005], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        self.bolla.removeFromParent()
+                        let modelBola = try! Boxtumpuk.loadBola()
+                        
+                        self.bolla = modelBola.bolla
                         self.bolla.position = self.originalPosition
-                        print("posisiakr2 \(self.bolla.position)")
+                        self.anchorEntity.addChild(self.bolla)
                     }
-                    print("posisiakr \(self.bolla.position)")
+                
                 }
+            
 //                DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
 //                    self?.bolla.position = self?.originalPosition ?? .zero
 //                    print("posisiakr \(self?.bolla.position)")
