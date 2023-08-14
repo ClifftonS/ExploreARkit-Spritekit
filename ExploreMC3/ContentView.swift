@@ -6,22 +6,24 @@
 //
 
 import SwiftUI
+import ARKit
+import SceneKit
 import RealityKit
 
-struct ContentView : View {
-    var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
-    }
-}
+//struct ContentView : View {
+//    var body: some View {
+//        ARViewContainer().edgesIgnoringSafeArea(.all)
+//    }
+//}
 
-struct ARViewContainer: UIViewRepresentable {
+struct ViewController: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         
         let arView = ARView(frame: .zero)
         
         // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
+        let boxAnchor = try! cannonBall.loadBox()
         
         // Add the box anchor to the scene
         arView.scene.anchors.append(boxAnchor)
@@ -35,9 +37,9 @@ struct ARViewContainer: UIViewRepresentable {
 }
 
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews : PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
 #endif
