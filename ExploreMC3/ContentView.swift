@@ -12,154 +12,137 @@ import FocusEntity
 import MultipeerSession
 
 struct ContentView : View {
+    @StateObject var vm = ARViewModel()
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
-        
+        ARViewContainer().edgesIgnoringSafeArea(.all).environmentObject(vm)
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    @State var taprecog = false
-    @State var multipeerSession: MultipeerSession?
-    @State var sessionIDObservation: NSKeyValueObservation?
+    @EnvironmentObject var vm: ARViewModel
+    typealias UIViewType = ARView
+    var bolla: Entity!
+    var anchorEntity: AnchorEntity!
+    var originalPosition: SIMD3<Float>!
     func makeUIView(context: Context) -> ARView {
         
-        let arView = ARView()
-        
-        // Start AR session
-        let session = arView.session
-        let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.horizontal]
-        config.environmentTexturing = .automatic
-        config.isCollaborationEnabled = true
-        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
-            config.sceneReconstruction = .mesh
-        }
-        session.run(config)
-        
-        sessionIDObservation = arView.session.observe(\.identifier, options: [.new]) { object, change in
-                    print("SessionID changed to: \(change.newValue!)")
-                    // Tell all other peers about your ARSession's changed ID, so
-                    // that they can keep track of which ARAnchors are yours.
-                    guard let multipeerSession = self.multipeerSession else { return }
-                    self.sendARSessionIDTo(peers: multipeerSession.connectedPeers)
-                }
-
-        multipeerSession = MultipeerSession(serviceName: "multiuser-ar", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
-        
-        // Add coaching overlay
-        let coachingOverlay = ARCoachingOverlayView()
-        coachingOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        coachingOverlay.session = session
-        coachingOverlay.goal = .horizontalPlane
-        arView.addSubview(coachingOverlay)
-        
-//        // Set debug options
-//        #if DEBUG
-//        arView.debugOptions = [.showFeaturePoints, .showAnchorOrigins, .showAnchorGeometry]
-//        #endif
-        
-        // Handle ARSession events via delegate
-        context.coordinator.view = arView
-        session.delegate = context.coordinator
-        
-        
-        // Handle taps
-        arView.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: context.coordinator,
-                action: #selector(Coordinator.handleTap)
-            )
-        )
-        
-
-        return arView
+        vm.arView.session.delegate = context.coordinator
+        _ = FocusEntity(on: vm.arView, style: .classic(color: .yellow))
+                
+        return vm.arView
         
     }
     
-    func updateUIView(_ uiView: ARView, context: Context) {
+    func updateUIView(_ uiView: ARView, context: Context) {}
+}
+extension ARView {
+    // Extned ARView to implement tapGesture handler
+    // Hybrid workaround between UIKit and SwiftUI
+    func enableTapGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        self.addGestureRecognizer(tapGestureRecognizer)
     }
-    func makeCoordinator() -> Coordinator {
-        Coordinator(taprecog: $taprecog)
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        let tapLocation = recognizer.location(in: self)
+                            
+        // Attempt to find a 3D location on a horizontal surface underneath the user's touch location.
+        let results = self.raycast(from: tapLocation, allowing: .estimatedPlane, alignment: .any)
+        
+        if let firstResult = results.first {
+            // Add an ARAnchor at the touch location with a special name you check later in `session(_:didAdd:)`.
+            let anchor = ARAnchor(name: "ball5", transform: firstResult.worldTransform)
+            self.session.add(anchor: anchor)
+        } else {
+            print("Warning: Object placement failed.")
+        }
     }
+//    func placeSceneObject(named entityName: String, for anchor: ARAnchor){
+//            let entity = try! ModelEntity.load(named: entityName)
+//
+//            entity.generateCollisionShapes(recursive: true)
+//    //        entity.installGestures([.rotation,.scale], for: entity)
+//
+//            let anchorEntity = AnchorEntity(anchor: anchor)
+//            anchorEntity.addChild(entity)
+//            self.scene.addAnchor(anchorEntity)
+//        }
+    
+    
+}
+
+extension ARViewContainer {
+    // Communicate changes from UIView to SwiftUI by updating the properties of your coordinator
+    // Confrom the coordinator to ARSessionDelegate
+    
     class Coordinator: NSObject, ARSessionDelegate {
-        weak var view: ARView?
-        var focusEntity: FocusEntity?
-        var tapDetected = false
+        var parent: ARViewContainer
         var bolla: Entity!
         var anchorEntity: AnchorEntity!
         var originalPosition: SIMD3<Float>!
-        @Binding var taprecog: Bool
-        init(taprecog: Binding<Bool>) { // Add this initializer
-                _taprecog = taprecog
-            }
-
-
+        var tapdetected: Bool = false
+        
+        init(_ parent: ARViewContainer) {
+            self.parent = parent
+        }
+                
         
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-            guard let view = self.view else { return }
-            debugPrint("Anchors added to the scene: ", anchors)
-            if focusEntity == nil {
-                self.focusEntity = FocusEntity(on: view, style: .classic(color: .yellow))
-            }
-            if taprecog == true{
-                for anchor in anchors {
-                    if let anchorName = anchor.name, anchorName == "bolamelompat" {
-                        placeObject(named: anchorName, for: anchor)
+            for anchor in anchors {
+                if let participantAnchor = anchor as? ARParticipantAnchor{
+                    print("Established joint experience with a peer.")
+                    
+                    let anchorEntity = AnchorEntity(anchor: participantAnchor)
+                    let mesh = MeshResource.generateSphere(radius: 0.03)
+                    let color = UIColor.red
+                    let material = SimpleMaterial(color: color, isMetallic: false)
+                    let coloredSphere = ModelEntity(mesh:mesh, materials:[material])
+                    
+                    anchorEntity.addChild(coloredSphere)
+                    
+                    self.parent.vm.arView.scene.addAnchor(anchorEntity)
+                } else {
+                    if !tapdetected{
+                        if let anchorName = anchor.name, anchorName == "ball5"{
+                            self.placeSceneObject(named: anchorName, for: anchor)
+                        }
+                        tapdetected = true
                     }
-//                    if let participantAnchor = anchor as? ARParticipantAnchor {
-//                        print("Success conect")
-//                        let anchorEntity = AnchorEntity(anchor: participantAnchor)
-//                        let mesh = MeshResource.generateSphere(radius: 0.03)
-//                        let color = UIColor.red
-//                        let material = SimpleMaterial(color: color, isMetallic: false)
-//                        let coloredSphere = ModelEntity(mesh: mesh, materials: [material])
-//                        anchorEntity.addChild(coloredSphere)
-//                        view.scene.addAnchor(anchorEntity)
-//                    }
                 }
             }
         }
-
         
-        @objc func handleTap() {
-            guard let view = self.view, let focusEntity = self.focusEntity else { return }
-            
-            if !tapDetected {
-                let modelEntity = try! Boxtumpuk.loadBox()
-                let modelBola = try! Boxtumpuk.loadBola()
-                bolla = modelBola.bolla
-                originalPosition = bolla.position
-                anchorEntity = AnchorEntity(plane: .horizontal)
-                anchorEntity.addChild(modelEntity)
-                anchorEntity.addChild(modelBola)
-                view.scene.addAnchor(anchorEntity)
-                let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-                        view.addGestureRecognizer(panGesture)
-                tapDetected = true
-                focusEntity.removeFromParent()
+        func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
+            guard let multipeerSession = self.parent.vm.multipeerSession else { return }
+            if !multipeerSession.connectedPeers.isEmpty {
+                guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+                else { fatalError("Unexpectedly failed to encode collaboration data.") }
+                // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
+                let dataIsCritical = data.priority == .critical
+                multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
             } else {
-//
+                print("Deferred sending collaboration to later because there are no peers.")
             }
-
         }
-        func placeObject(named entityName: String, for anchor: ARAnchor){
-            guard let view = self.view else { return }
-            let ballEntity = try! ModelEntity.load(named: entityName)
-            let anchorsEntity = AnchorEntity(anchor: anchor)
+        func placeSceneObject(named entityName: String, for anchor: ARAnchor){
             let modelEntity = try! Boxtumpuk.loadBox()
-            anchorsEntity.addChild(ballEntity)
-            view.scene.addAnchor(anchorsEntity)
-            
+            let modelBola = try! Boxtumpuk.loadBola()
+            bolla = modelBola.bolla
+            originalPosition = bolla.position
+            anchorEntity = AnchorEntity(anchor: anchor)
+            anchorEntity.addChild(modelEntity)
+            anchorEntity.addChild(modelBola)
+            self.parent.vm.arView.scene.addAnchor(anchorEntity)
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+            self.parent.vm.arView.addGestureRecognizer(panGesture)
         }
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-            guard let view = self.view else { return }
-            var translation = gesture.translation(in: view)
-            let location = gesture.location(in: view)
+            var translation = gesture.translation(in: self.parent.vm.arView)
+            let location = gesture.location(in: self.parent.vm.arView)
             let locationVector = SIMD3<Float>(Float(location.x), Float(location.y), 0)
-                
-                // Calculate the distance between gesture location and bolla's position
-                let distance = simd_distance(locationVector, bolla.position)
+            
+            // Calculate the distance between gesture location and bolla's position
+            let distance = simd_distance(locationVector, bolla.position)
             
             if gesture.state == .began{
                 //                if let hitEntity = view.entity(at: location), hitEntity == bolla {
@@ -170,7 +153,7 @@ struct ARViewContainer: UIViewRepresentable {
             else if gesture.state == .changed {
                 // Get the translation of the gesture in the ARView's coordinate system
                 
-                    translation = gesture.translation(in: view)
+                translation = gesture.translation(in: self.parent.vm.arView)
                 
                 
             } else if gesture.state == .ended {
@@ -178,7 +161,7 @@ struct ARViewContainer: UIViewRepresentable {
                 print("Float translation y \(-Float(translation.y) * 0.0001)")
                 print("Float translation z \(distance)")
                 
-                    if let physicsEntity = bolla as? Entity & HasPhysics {
+                if let physicsEntity = bolla as? Entity & HasPhysics {
                     physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0005, 0.01, -Float(translation.y) * 0.0005], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                         self.bolla.removeFromParent()
@@ -188,84 +171,88 @@ struct ARViewContainer: UIViewRepresentable {
                         self.bolla.position = self.originalPosition
                         self.anchorEntity.addChild(self.bolla)
                     }
-                
+                    
                 }
             }
-            
         }
+            
     }
     
-}
-extension ARViewContainer {
-    private func sendARSessionIDTo(peers: [PeerID]){
-        guard let multipeerSession = multipeerSession else { return }
-        let idString = ARView.session.identifier.uuidString
-        let command = "SessionID:" + idString
-        if let commandData = command.data(using: .utf8){
-            multipeerSession.sendToPeers(commandData, reliably: true, peers: peers)
-        }
-    }
-
-    func receivedData(_ data: Data, from peer: PeerID) {
-        guard let multipeerSession = multipeerSession else { return }
-        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data) {
-            ARView.session.update(with: collaborationData)
-            return
-        }
-        let sessionIDCommandString = "SessionID"
-        if let commandString = String(data: data, encoding: .utf8), commandString.starts(with: sessionIDCommandString){
-            let newSessionID = String(commandString[commandString.index(commandString.startIndex, offsetBy: sessionIDCommandString.count)...])
-            if let oldSessionID = multipeerSession.peerSessionIDs[peer] {
-                removeAllAnchorsOriginatingFromARSessionWithID(oldSessionID)
-            }
-            multipeerSession.peerSessionIDs[peer] = newSessionID
-        }
-    }
-    func peerDiscovered(_ peer: PeerID) -> Bool {
-        guard let multipeerSession = multipeerSession else { return false }
-        if multipeerSession.connectedPeers.count > 2 {
-            print("This game limited to 2 players")
-            return false
-        } else {
-            return true
-        }
-    }
-
-    func peerJoined(_ peer: PeerID) {
-        print("A player wants to join the game. Hold the device next to each other")
-        sendARSessionIDTo(peers: [peer])
-    }
-    func peerLeft(_ peer: PeerID) {
-        guard let multipeerSession = multipeerSession else { return }
-        print("A player has left the game")
-        if let sessionID = multipeerSession.peerSessionIDs[peer] {
-            removeAllAnchorsOriginatingFromARSessionWithID(sessionID)
-            multipeerSession.peerSessionIDs.removeValue(forKey: peer)
-        }
-    }
-
-    private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier: String) {
-        guard let frame = ARView.session.currentFrame else { return }
-        for anchor in frame.anchors {
-            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
-            if anchorSessionID.uuidString == identifier {
-                ARView.session.remove(anchor: anchor)
-            }
-        }
-    }
-    func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
-        guard let multipeerSession = multipeerSession else { return }
-        if !multipeerSession.connectedPeers.isEmpty {
-            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
-            else { fatalError("Unexpectedly failed to encode collaboration data.") }
-            // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
-            let dataIsCritical = data.priority == .critical
-            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
-        } else {
-            print("Deferred sending collaboration to later because there are no peers.")
-        }
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
     }
 }
+
+//extension ARViewContainer {
+//    private func sendARSessionIDTo(peers: [PeerID]){
+//        guard let multipeerSession = multipeerSession else { return }
+//        let idString = ARView.session.identifier.uuidString
+//        let command = "SessionID:" + idString
+//        if let commandData = command.data(using: .utf8){
+//            multipeerSession.sendToPeers(commandData, reliably: true, peers: peers)
+//        }
+//    }
+//
+//    func receivedData(_ data: Data, from peer: PeerID) {
+//        guard let multipeerSession = multipeerSession else { return }
+//        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data) {
+//            ARView.session.update(with: collaborationData)
+//            return
+//        }
+//        let sessionIDCommandString = "SessionID"
+//        if let commandString = String(data: data, encoding: .utf8), commandString.starts(with: sessionIDCommandString){
+//            let newSessionID = String(commandString[commandString.index(commandString.startIndex, offsetBy: sessionIDCommandString.count)...])
+//            if let oldSessionID = multipeerSession.peerSessionIDs[peer] {
+//                removeAllAnchorsOriginatingFromARSessionWithID(oldSessionID)
+//            }
+//            multipeerSession.peerSessionIDs[peer] = newSessionID
+//        }
+//    }
+//    func peerDiscovered(_ peer: PeerID) -> Bool {
+//        guard let multipeerSession = multipeerSession else { return false }
+//        if multipeerSession.connectedPeers.count > 2 {
+//            print("This game limited to 2 players")
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+//
+//    func peerJoined(_ peer: PeerID) {
+//        print("A player wants to join the game. Hold the device next to each other")
+//        sendARSessionIDTo(peers: [peer])
+//    }
+//    func peerLeft(_ peer: PeerID) {
+//        guard let multipeerSession = multipeerSession else { return }
+//        print("A player has left the game")
+//        if let sessionID = multipeerSession.peerSessionIDs[peer] {
+//            removeAllAnchorsOriginatingFromARSessionWithID(sessionID)
+//            multipeerSession.peerSessionIDs.removeValue(forKey: peer)
+//        }
+//    }
+//
+//    private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier: String) {
+//        guard let frame = ARView.session.currentFrame else { return }
+//        for anchor in frame.anchors {
+//            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
+//            if anchorSessionID.uuidString == identifier {
+//                ARView.session.remove(anchor: anchor)
+//            }
+//        }
+//    }
+//    func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
+//        guard let multipeerSession = multipeerSession else { return }
+//        if !multipeerSession.connectedPeers.isEmpty {
+//            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+//            else { fatalError("Unexpectedly failed to encode collaboration data.") }
+//            // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
+//            let dataIsCritical = data.priority == .critical
+//            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
+//        } else {
+//            print("Deferred sending collaboration to later because there are no peers.")
+//        }
+//    }
+//}
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
