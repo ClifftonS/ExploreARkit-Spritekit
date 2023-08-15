@@ -126,6 +126,7 @@ extension ARViewContainer {
             let modelBola = try! ModelFix.loadBola()
             bolla = modelBola.bolla
             originalPosition = bolla.position
+            print("Posisiawl1 \(bolla.position)")
             anchorEntity = AnchorEntity(anchor: anchor)
             anchorEntity.addChild(modelEntity)
             anchorEntity.addChild(modelBola)
@@ -165,7 +166,9 @@ extension ARViewContainer {
                         let modelBola = try! ModelFix.loadBola()
                         
                         self.bolla = modelBola.bolla
+                        print("Posisiawl \(self.bolla.position)")
                         self.bolla.position = self.originalPosition
+                        print("Posisiakhr \(self.bolla.position)")
                         self.anchorEntity.addChild(self.bolla)
                     }
                     
