@@ -33,5 +33,10 @@
     "libraryIdentifier" : "b3d949444e5892921c3965ae17aae621",
     "format" : "model",
     "displayName" : "shortBase.usdz"
+  },
+  {
+    "libraryIdentifier" : "20ba09d4ae7063e8a688b64230a993a1",
+    "format" : "model",
+    "displayName" : "plank.usdz"
   }
 ]

@@ -122,8 +122,8 @@ extension ARViewContainer {
             }
         }
         func placeSceneObject(named entityName: String, for anchor: ARAnchor){
-            let modelEntity = try! Boxtumpuk.loadBox()
-            let modelBola = try! Boxtumpuk.loadBola()
+            let modelEntity = try! ModelFix.loadBox()
+            let modelBola = try! ModelFix.loadBola()
             bolla = modelBola.bolla
             originalPosition = bolla.position
             anchorEntity = AnchorEntity(anchor: anchor)
@@ -159,7 +159,7 @@ extension ARViewContainer {
                 print("Float translation z \(distance)")
                 
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0005, 0.01, -Float(translation.y) * 0.0005], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.001, 0.01, -Float(translation.y) * 0.001], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                         self.bolla.removeFromParent()
                         let modelBola = try! Boxtumpuk.loadBola()
