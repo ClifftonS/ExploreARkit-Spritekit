@@ -9,7 +9,6 @@ import SwiftUI
 import RealityKit
 import ARKit
 import FocusEntity
-import MultipeerSession
 
 struct ContentView : View {
     @StateObject var vm = ARViewModel()
@@ -21,13 +20,10 @@ struct ContentView : View {
 struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var vm: ARViewModel
     typealias UIViewType = ARView
-    var bolla: Entity!
-    var anchorEntity: AnchorEntity!
-    var originalPosition: SIMD3<Float>!
     func makeUIView(context: Context) -> ARView {
         
         vm.arView.session.delegate = context.coordinator
-        _ = FocusEntity(on: vm.arView, style: .classic(color: .yellow))
+//        _ = FocusEntity(on: vm.arView, style: .classic(color: .yellow))
                 
         return vm.arView
         
@@ -61,7 +57,7 @@ extension ARView {
 //            let entity = try! ModelEntity.load(named: entityName)
 //
 //            entity.generateCollisionShapes(recursive: true)
-//    //        entity.installGestures([.rotation,.scale], for: entity)
+////            entity.installGestures([.rotation,.scale], for: entity)
 //
 //            let anchorEntity = AnchorEntity(anchor: anchor)
 //            anchorEntity.addChild(entity)
@@ -102,11 +98,12 @@ extension ARViewContainer {
                     
                     self.parent.vm.arView.scene.addAnchor(anchorEntity)
                 } else {
-                    if !tapdetected{
-                        if let anchorName = anchor.name, anchorName == "ball5"{
+                    if let anchorName = anchor.name, anchorName == "ball5" {
+                        if tapdetected == false{
                             self.placeSceneObject(named: anchorName, for: anchor)
+                            tapdetected = true
                         }
-                        tapdetected = true
+                        
                     }
                 }
             }
