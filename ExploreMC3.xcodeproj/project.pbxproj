@@ -12,6 +12,9 @@
 		0BD7761A2A8B211300A8B9BF /* barrel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776192A8B211300A8B9BF /* barrel.usdz */; };
 		0BD7761C2A8B21B800A8B9BF /* house.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD7761B2A8B21B800A8B9BF /* house.usdz */; };
 		0BD7761E2A8B21E800A8B9BF /* island.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD7761D2A8B21E800A8B9BF /* island.usdz */; };
+		0BD776222A8B22AC00A8B9BF /* base1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD7761F2A8B22AC00A8B9BF /* base1.usdz */; };
+		0BD776232A8B22AC00A8B9BF /* base2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776202A8B22AC00A8B9BF /* base2.usdz */; };
+		0BD776242A8B22AC00A8B9BF /* shortBase.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776212A8B22AC00A8B9BF /* shortBase.usdz */; };
 		4E321C1E2A763D89000B20AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1D2A763D89000B20AB /* AppDelegate.swift */; };
 		4E321C202A763D89000B20AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1F2A763D89000B20AB /* ContentView.swift */; };
 		4E321C222A763D89000B20AB /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C212A763D89000B20AB /* Experience.rcproject */; };
@@ -26,6 +29,9 @@
 		0BD776192A8B211300A8B9BF /* barrel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = barrel.usdz; sourceTree = "<group>"; };
 		0BD7761B2A8B21B800A8B9BF /* house.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = house.usdz; sourceTree = "<group>"; };
 		0BD7761D2A8B21E800A8B9BF /* island.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = island.usdz; sourceTree = "<group>"; };
+		0BD7761F2A8B22AC00A8B9BF /* base1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = base1.usdz; sourceTree = "<group>"; };
+		0BD776202A8B22AC00A8B9BF /* base2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = base2.usdz; sourceTree = "<group>"; };
+		0BD776212A8B22AC00A8B9BF /* shortBase.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shortBase.usdz; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E321C1F2A763D89000B20AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +58,9 @@
 				0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */,
 				0BD7761B2A8B21B800A8B9BF /* house.usdz */,
 				0BD7761D2A8B21E800A8B9BF /* island.usdz */,
+				0BD7761F2A8B22AC00A8B9BF /* base1.usdz */,
+				0BD776202A8B22AC00A8B9BF /* base2.usdz */,
+				0BD776212A8B22AC00A8B9BF /* shortBase.usdz */,
 				0BD776152A8B190800A8B9BF /* MyScene.rcproject */,
 			);
 			path = "Reality Asset";
@@ -154,7 +163,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD7761E2A8B21E800A8B9BF /* island.usdz in Resources */,
+				0BD776242A8B22AC00A8B9BF /* shortBase.usdz in Resources */,
+				0BD776232A8B22AC00A8B9BF /* base2.usdz in Resources */,
 				0BD7761A2A8B211300A8B9BF /* barrel.usdz in Resources */,
+				0BD776222A8B22AC00A8B9BF /* base1.usdz in Resources */,
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				0BD7761C2A8B21B800A8B9BF /* house.usdz in Resources */,
 				0BD776122A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets in Resources */,
