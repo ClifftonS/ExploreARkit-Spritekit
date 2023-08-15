@@ -159,10 +159,10 @@ extension ARViewContainer {
                 print("Float translation z \(distance)")
                 
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.001, 0.01, -Float(translation.y) * 0.001], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, 0.01, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                         self.bolla.removeFromParent()
-                        let modelBola = try! Boxtumpuk.loadBola()
+                        let modelBola = try! ModelFix.loadBola()
                         
                         self.bolla = modelBola.bolla
                         self.bolla.position = self.originalPosition

@@ -1153,106 +1153,7 @@
               "material" : "concrete",
               "overrides" : {
                 "children" : {
-                  "6C5F6D9D-8058-405F-9A7B-BA5DAD050F2D" : {
-                    "overrides" : {
-                      "arguments" : [
-                        [
-                          "bevelRadius",
-                          {
-                            "typeName" : "Double",
-                            "value" : 0.0050000000000000001
-                          }
-                        ],
-                        [
-                          "depth",
-                          {
-                            "typeName" : "Double",
-                            "value" : 0.10000000000000001
-                          }
-                        ],
-                        [
-                          "height",
-                          {
-                            "typeName" : "Double",
-                            "value" : 0.10000000000000001
-                          }
-                        ],
-                        [
-                          "material",
-                          {
-                            "typeName" : "String",
-                            "value" : "standard"
-                          }
-                        ],
-                        [
-                          "materialColor",
-                          {
-                            "typeName" : "double4",
-                            "value" : [
-                              0.10999999940395355,
-                              0.55000001192092896,
-                              0.10999999940395355,
-                              1
-                            ]
-                          }
-                        ],
-                        [
-                          "type",
-                          {
-                            "typeName" : "String",
-                            "value" : "box"
-                          }
-                        ],
-                        [
-                          "width",
-                          {
-                            "typeName" : "Double",
-                            "value" : 0.10000000000000001
-                          }
-                        ]
-                      ],
-                      "factory" : {
-                        "identifier" : "com.apple.rc.af.CoreAssetFactories.PrimitiveShapeAssetFactory",
-                        "version" : "1.0"
-                      },
-                      "runtimeAttributes" : [
-                        [
-                          "RuntimeIdentifier",
-                          {
-                            "typeName" : "UUID",
-                            "value" : "C65BD37F-5D69-4BE3-B0D9-0F81486D8B57"
-                          }
-                        ],
-                        [
-                          "rigidBody-enabled",
-                          {
-                            "typeName" : "Bool",
-                            "value" : true
-                          }
-                        ]
-                      ]
-                    },
-                    "transform" : {
-                      "matrix" : [
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1,
-                        0,
-                        0.029287517070770264,
-                        0.15000000596046448,
-                        0.28495949506759644,
-                        1
-                      ]
-                    }
-                  },
+                  "6C5F6D9D-8058-405F-9A7B-BA5DAD050F2D" : null,
                   "8F21A747-71D7-4EC8-9826-87FD92459443" : {
                     "overrides" : {
                       "arguments" : [
@@ -1307,7 +1208,7 @@
                           "width",
                           {
                             "typeName" : "Double",
-                            "value" : 0.10000000000000001
+                            "value" : 0.12968850135803223
                           }
                         ]
                       ],
@@ -1329,26 +1230,140 @@
                             "typeName" : "Bool",
                             "value" : true
                           }
+                        ],
+                        [
+                          "rigidBody-motionType",
+                          {
+                            "typeName" : "REMotionType",
+                            "value" : "static"
+                          }
                         ]
                       ]
                     },
                     "transform" : {
                       "matrix" : [
-                        1,
+                        0.80000001192092896,
                         0,
                         0,
                         0,
                         0,
-                        1,
+                        0.80000001192092896,
                         0,
                         0,
                         0,
                         0,
-                        1,
+                        0.80000001192092896,
                         0,
-                        0.029287517070770264,
-                        0.049999985843896866,
-                        0.28495949506759644,
+                        0.052620686590671539,
+                        0.040000002831220627,
+                        0.3649594783782959,
+                        1
+                      ]
+                    }
+                  },
+                  "599C4431-EB29-4317-9A86-D3F4421FD740" : {
+                    "overrides" : {
+                      "arguments" : [
+                        [
+                          "bevelRadius",
+                          {
+                            "typeName" : "Double",
+                            "value" : 0.0050000000000000001
+                          }
+                        ],
+                        [
+                          "depth",
+                          {
+                            "typeName" : "Double",
+                            "value" : 0.10000000000000001
+                          }
+                        ],
+                        [
+                          "height",
+                          {
+                            "typeName" : "Double",
+                            "value" : 0.10000000000000001
+                          }
+                        ],
+                        [
+                          "material",
+                          {
+                            "typeName" : "String",
+                            "value" : "standard"
+                          }
+                        ],
+                        [
+                          "materialColor",
+                          {
+                            "typeName" : "double4",
+                            "value" : [
+                              0.10999999940395355,
+                              0.55000001192092896,
+                              0.10999999940395355,
+                              1
+                            ]
+                          }
+                        ],
+                        [
+                          "type",
+                          {
+                            "typeName" : "String",
+                            "value" : "box"
+                          }
+                        ],
+                        [
+                          "width",
+                          {
+                            "typeName" : "Double",
+                            "value" : 0.12968850135803223
+                          }
+                        ]
+                      ],
+                      "factory" : {
+                        "identifier" : "com.apple.rc.af.CoreAssetFactories.PrimitiveShapeAssetFactory",
+                        "version" : "1.0"
+                      },
+                      "runtimeAttributes" : [
+                        [
+                          "RuntimeIdentifier",
+                          {
+                            "typeName" : "UUID",
+                            "value" : "A164A3B2-C025-4C67-819D-385CBC5FD47E"
+                          }
+                        ],
+                        [
+                          "rigidBody-enabled",
+                          {
+                            "typeName" : "Bool",
+                            "value" : true
+                          }
+                        ],
+                        [
+                          "rigidBody-motionType",
+                          {
+                            "typeName" : "REMotionType",
+                            "value" : "static"
+                          }
+                        ]
+                      ]
+                    },
+                    "transform" : {
+                      "matrix" : [
+                        0.80000001192092896,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0.80000001192092896,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0.80000001192092896,
+                        0,
+                        0.052620679140090942,
+                        0.11999999731779099,
+                        0.3649594783782959,
                         1
                       ]
                     }
@@ -1360,7 +1375,7 @@
                           "diameter",
                           {
                             "typeName" : "Double",
-                            "value" : 0.044999999999999998
+                            "value" : 0.040118478536135579
                           }
                         ],
                         [
@@ -1451,9 +1466,9 @@
                         0,
                         1,
                         0,
-                        0.031010501086711884,
-                        0.22249999642372131,
-                        0.28232693672180176,
+                        0.052385248243808746,
+                        0.18177372217178345,
+                        0.36253213882446289,
                         1
                       ]
                     }
@@ -1474,21 +1489,21 @@
               "title" : "bola",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.99429774284362793,
-                  -3.1840567515928342e-08,
-                  0.10663926601409912,
+                  0.31237497925758362,
+                  6.2665495015323813e-09,
+                  -0.94995886087417603,
                   0,
-                  0.05599488690495491,
-                  0.85104995965957642,
-                  -0.5220906138420105,
+                  -0.23961788415908813,
+                  0.96766459941864014,
+                  -0.078793734312057495,
                   0,
-                  -0.090755268931388855,
-                  0.52508491277694702,
-                  0.84619694948196411,
+                  0.91924142837524414,
+                  0.2522406280040741,
+                  0.30227425694465637,
                   0,
-                  0.0044578183442354202,
-                  0.40491962432861328,
-                  0.71735656261444092,
+                  0.55207675695419312,
+                  0.26211398839950562,
+                  0.44867986440658569,
                   1
                 ],
                 "sceneTransform" : [
