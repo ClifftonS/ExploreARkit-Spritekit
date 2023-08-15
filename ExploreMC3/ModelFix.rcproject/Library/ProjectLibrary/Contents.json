@@ -1,0 +1,37 @@
+[
+  {
+    "libraryIdentifier" : "d3bd0a5499b10d5165145b1860551b11",
+    "format" : "model",
+    "displayName" : "barrel.usdz"
+  },
+  {
+    "libraryIdentifier" : "601af037036304ac3107091a778e0d90",
+    "format" : "model",
+    "displayName" : "base1.usdz"
+  },
+  {
+    "libraryIdentifier" : "a711a9f813faa3a02bc2ef49d14492c0",
+    "format" : "model",
+    "displayName" : "base2.usdz"
+  },
+  {
+    "libraryIdentifier" : "3c8509f596d2109dff77060508c06f02",
+    "format" : "model",
+    "displayName" : "coconutTree.usdz"
+  },
+  {
+    "libraryIdentifier" : "cc25ffcd34d84c4d14ec97a37228de5a",
+    "format" : "model",
+    "displayName" : "house.usdz"
+  },
+  {
+    "libraryIdentifier" : "25a456869ece669de42e51398d591a0a",
+    "format" : "model",
+    "displayName" : "island.usdz"
+  },
+  {
+    "libraryIdentifier" : "b3d949444e5892921c3965ae17aae621",
+    "format" : "model",
+    "displayName" : "shortBase.usdz"
+  }
+]
