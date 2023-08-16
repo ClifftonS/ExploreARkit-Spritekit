@@ -126,8 +126,7 @@ extension ARViewContainer {
             let modelBola = try! ModelFix.loadBola()
             bolla = modelBola.bolla
             originalPosition = bolla.position
-            print("Posisiawl1 \(bolla.position)")
-            anchorEntity = AnchorEntity(anchor: anchor)
+            anchorEntity = AnchorEntity(plane: .horizontal)
             anchorEntity.addChild(modelEntity)
             anchorEntity.addChild(modelBola)
             self.parent.vm.arView.scene.addAnchor(anchorEntity)
@@ -160,15 +159,11 @@ extension ARViewContainer {
                 print("Float translation z \(distance)")
                 
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, 0.01, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y) * 0.0008, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                         self.bolla.removeFromParent()
                         let modelBola = try! ModelFix.loadBola()
-                        
                         self.bolla = modelBola.bolla
-                        print("Posisiawl \(self.bolla.position)")
-                        self.bolla.position = self.originalPosition
-                        print("Posisiakhr \(self.bolla.position)")
                         self.anchorEntity.addChild(self.bolla)
                     }
                     
