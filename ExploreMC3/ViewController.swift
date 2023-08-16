@@ -85,6 +85,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
 
             let configuration = ARWorldTrackingConfiguration()
             configuration.planeDetection = .horizontal
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+            sceneView.addGestureRecognizer(tap)
         }
         
         
