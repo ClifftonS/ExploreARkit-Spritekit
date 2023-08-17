@@ -53,18 +53,6 @@ extension ARView {
             print("Warning: Object placement failed.")
         }
     }
-//    func placeSceneObject(named entityName: String, for anchor: ARAnchor){
-//            let entity = try! ModelEntity.load(named: entityName)
-//
-//            entity.generateCollisionShapes(recursive: true)
-////            entity.installGestures([.rotation,.scale], for: entity)
-//
-//            let anchorEntity = AnchorEntity(anchor: anchor)
-//            anchorEntity.addChild(entity)
-//            self.scene.addAnchor(anchorEntity)
-//        }
-    
-    
 }
 
 extension ARViewContainer {
@@ -77,6 +65,7 @@ extension ARViewContainer {
         var anchorEntity: AnchorEntity!
         var originalPosition: SIMD3<Float>!
         var tapdetected: Bool = false
+        var plane = [ModelEntity]()
         
         init(_ parent: ARViewContainer) {
             self.parent = parent
@@ -130,8 +119,21 @@ extension ARViewContainer {
             anchorEntity.addChild(modelEntity)
             anchorEntity.addChild(modelBola)
             self.parent.vm.arView.scene.addAnchor(anchorEntity)
+            for _ in 0...3{
+                let planeModel = buildPlane()
+                plane.append(planeModel)
+                self.anchorEntity.addChild(planeModel)
+            }
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
             self.parent.vm.arView.addGestureRecognizer(panGesture)
+        }
+        func buildPlane() -> ModelEntity{
+            let plane = ModelEntity(mesh: .generateSphere(radius: 0.02), materials: [SimpleMaterial(color: UIColor.white, roughness: 0, isMetallic: false)])
+            plane.position.y = bolla.position.y
+            plane.position.x = bolla.position.x
+            plane.position.z = bolla.position.z
+            plane.isEnabled = false
+            return plane
         }
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             var translation = gesture.translation(in: self.parent.vm.arView)
@@ -149,17 +151,31 @@ extension ARViewContainer {
             }
             else if gesture.state == .changed {
                 // Get the translation of the gesture in the ARView's coordinate system
-                
+                for i in 0...3{
+                    plane[i].isEnabled = false
+                }
                 translation = gesture.translation(in: self.parent.vm.arView)
+                var counter = 0
+                while counter < plane.count{
+                    let translationX = (Float(translation.x) * 0.0008) * Float(counter+1)
+                    let translationY = (Float(translation.y) * 0.0003) * Float(counter+1)
+                    let translationZ = (Float(translation.y) * 0.0008) * Float(counter+1)
+                    
+                    plane[counter].position.x = bolla.position.x - translationX
+                    plane[counter].position.y = bolla.position.y + translationY
+                    plane[counter].position.z = bolla.position.z - translationZ
+                    
+                    plane[counter].isEnabled = true
+                    counter += 1
+                }
                 
                 
             } else if gesture.state == .ended {
-                print("Float translation x \(-Float(translation.x) * 0.0001)")
-                print("Float translation y \(-Float(translation.y) * 0.0001)")
-                print("Float translation z \(distance)")
-                
+                for i in 0...3{
+                    plane[i].isEnabled = false
+                }
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y) * 0.0008, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y) * 0.0003, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                         self.bolla.removeFromParent()
                         let modelBola = try! ModelFix.loadBola()
