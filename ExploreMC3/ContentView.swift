@@ -9,12 +9,32 @@ import SwiftUI
 import RealityKit
 import ARKit
 import FocusEntity
+import AVFoundation
 
+var audioPlayer : AVAudioPlayer?
 struct ContentView : View {
     @StateObject var vm = ARViewModel()
+
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all).environmentObject(vm)
+        ARViewContainer().edgesIgnoringSafeArea(.all).environmentObject(vm).onAppear(perform: self.playSound)
     }
+    func playSound(){
+          
+            //getting the resource path
+            let resourcePath = Bundle.main.url(forResource: "stranger", withExtension: "mp3")
+            
+            do{
+                //initializing audio player with the resource path
+                audioPlayer = try AVAudioPlayer(contentsOf: resourcePath!)
+                
+                //play the audio
+//                audioPlayer?.play()
+            }
+            catch{
+              //error handling
+                print(error.localizedDescription)
+            }
+        }
 }
 
 struct ARViewContainer: UIViewRepresentable {
@@ -66,6 +86,7 @@ extension ARViewContainer {
         var originalPosition: SIMD3<Float>!
         var tapdetected: Bool = false
         var plane = [ModelEntity]()
+        var fallingObjects: [Entity?] = []
         
         init(_ parent: ARViewContainer) {
             self.parent = parent
@@ -113,13 +134,19 @@ extension ARViewContainer {
         func placeSceneObject(named entityName: String, for anchor: ARAnchor){
             let modelEntity = try! ModelFix.loadBox()
             let modelBola = try! ModelFix.loadBola()
+            for x in 0...7{
+                let boxIndex = "box\(x+1)"
+                    if let boxModel = modelEntity.findEntity(named: boxIndex) {
+                        fallingObjects.append(boxModel)
+                    }
+            }
             bolla = modelBola.bolla
             originalPosition = bolla.position
             anchorEntity = AnchorEntity(plane: .horizontal)
             anchorEntity.addChild(modelEntity)
             anchorEntity.addChild(modelBola)
             self.parent.vm.arView.scene.addAnchor(anchorEntity)
-            for _ in 0...3{
+            for _ in 0...2{
                 let planeModel = buildPlane()
                 plane.append(planeModel)
                 self.anchorEntity.addChild(planeModel)
@@ -127,6 +154,12 @@ extension ARViewContainer {
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
             self.parent.vm.arView.addGestureRecognizer(panGesture)
         }
+//        func sendImpulseData(_ impulse: SIMD3<Float>) {
+//            guard let multipeerSession = self.parent.vm.multipeerSession else { return }
+//
+//            let impulseData = try! NSKeyedArchiver.archivedData(withRootObject: impulse, requiringSecureCoding: true)
+//            multipeerSession.sendToAllPeers(impulseData, reliably: true) // Ubah menjadi true jika data ini kritis.
+//        }
         func buildPlane() -> ModelEntity{
             let plane = ModelEntity(mesh: .generateSphere(radius: 0.02), materials: [SimpleMaterial(color: UIColor.white, roughness: 0, isMetallic: false)])
             plane.position.y = bolla.position.y
@@ -151,14 +184,14 @@ extension ARViewContainer {
             }
             else if gesture.state == .changed {
                 // Get the translation of the gesture in the ARView's coordinate system
-                for i in 0...3{
+                for i in 0...2{
                     plane[i].isEnabled = false
                 }
                 translation = gesture.translation(in: self.parent.vm.arView)
                 var counter = 0
                 while counter < plane.count{
                     let translationX = (Float(translation.x) * 0.0008) * Float(counter+1)
-                    let translationY = (Float(translation.y) * 0.0003) * Float(counter+1)
+                    let translationY = (Float(translation.y) * 0.0001) * Float(counter+1)
                     let translationZ = (Float(translation.y) * 0.0008) * Float(counter+1)
                     
                     plane[counter].position.x = bolla.position.x - translationX
@@ -171,12 +204,17 @@ extension ARViewContainer {
                 
                 
             } else if gesture.state == .ended {
-                for i in 0...3{
+                for i in 0...2{
                     plane[i].isEnabled = false
                 }
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y) * 0.0003, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+//                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        for x in 0...7{
+                            print("posisibox \(self.fallingObjects[x+1]?.position.y)")
+                        }
+                        
                         self.bolla.removeFromParent()
                         let modelBola = try! ModelFix.loadBola()
                         self.bolla = modelBola.bolla
