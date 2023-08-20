@@ -123,12 +123,15 @@ extension ARViewContainer {
     class Coordinator: NSObject, ARSessionDelegate {
         var parent: ARViewContainer
         var bolla: Entity!
+        var canon: Entity!
         var anchorEntity: AnchorEntity!
         var originalPosition: SIMD3<Float>!
         var tapdetected: Bool = false
         var plane = [ModelEntity]()
         var fallingObjects: [Entity?] = []
         var hasWon: Binding<Bool>
+        var panavailable = true
+        var rotationAngle: Float = 180.0
         
         init(_ parent: ARViewContainer, hasWon: Binding<Bool>) {
             self.parent = parent
@@ -191,7 +194,10 @@ extension ARViewContainer {
                         fallingObjects.append(boxModel)
                     }
             }
+            canon = modelBola.canon
             bolla = modelBola.bolla
+            print("Posisiputer \(canon.transform.rotation)")
+            canon.transform.rotation = simd_quatf(angle: 9.4, axis: [0, 1, 0])
             originalPosition = bolla.position
             anchorEntity = AnchorEntity(plane: .horizontal)
             anchorEntity.addChild(modelEntity)
@@ -220,90 +226,97 @@ extension ARViewContainer {
             return plane
         }
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-            var translation = gesture.translation(in: self.parent.vm.arView)
-            let location = gesture.location(in: self.parent.vm.arView)
-            let locationVector = SIMD3<Float>(Float(location.x), Float(location.y), 0)
-            
-            // Calculate the distance between gesture location and bolla's position
-            let distance = simd_distance(locationVector, bolla.position)
-            
-            if gesture.state == .began{
-                //                if let hitEntity = view.entity(at: location), hitEntity == bolla {
+            if panavailable == true{
+                var translation = gesture.translation(in: self.parent.vm.arView)
+                let location = gesture.location(in: self.parent.vm.arView)
+                let locationVector = SIMD3<Float>(Float(location.x), Float(location.y), 0)
                 
-                //                                isPanning = true
-                //                            }
-            }
-            else if gesture.state == .changed {
-                // Get the translation of the gesture in the ARView's coordinate system
-                for i in 0...2{
-                    plane[i].isEnabled = false
-                }
-                translation = gesture.translation(in: self.parent.vm.arView)
-                var counter = 0
-                while counter < plane.count{
-                    let translationX = (Float(translation.x) * 0.0008) * Float(counter+1)
-                    let translationY = (Float(translation.y) * 0.00008) * Float(counter+1)
-                    let translationZ = (Float(translation.y) * 0.0008) * Float(counter+1)
+                // Calculate the distance between gesture location and bolla's position
+                let distance = simd_distance(locationVector, bolla.position)
+                
+                if gesture.state == .began{
+                    //                if let hitEntity = view.entity(at: location), hitEntity == bolla {
                     
-                    plane[counter].position.x = bolla.position.x - translationX
-                    plane[counter].position.y = bolla.position.y + translationY
-                    plane[counter].position.z = bolla.position.z - translationZ
-                    
-                    plane[counter].isEnabled = true
-                    counter += 1
+                    //                                isPanning = true
+                    //                            }
                 }
-                
-                
-            } else if gesture.state == .ended {
-                for i in 0...2{
-                    plane[i].isEnabled = false
-                }
-                if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0005, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
-//                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4){
-//                        for x in 0..<self.fallingObjects.count {
-//                            if let fallingObject = self.fallingObjects[x] {
-//                                if x <= 3{
-//                                    if fallingObject.position.y < -0.1{
-//                                        self.fall += 1
-//                                    }
-//                                } else if x > 3 && x <= 6 {
-//                                    if fallingObject.position.y < 0.02{
-//                                        self.fall += 1
-//                                    }
-//                                }else{
-//                                    if fallingObject.position.y < -0.1{
-//                                        self.fall += 1
-//                                    }
-//                                }
-//
-//                                if self.fall == 8 {
-//                                    self.hasWon = true
-//                                    print("Congratulations! You win!")
-//                                }
-//                                print("posisibox \(fallingObject.position.y)")
-//                            }
-//                        }
+                else if gesture.state == .changed {
+                    // Get the translation of the gesture in the ARView's coordinate system
+                    for i in 0...2{
+                        plane[i].isEnabled = false
+                    }
+                    translation = gesture.translation(in: self.parent.vm.arView)
+                    var counter = 0
+                    while counter < plane.count{
+                        let translationX = (Float(translation.x) * 0.0008) * Float(counter+1)
+                        let translationY = (Float(translation.y) * 0.00008) * Float(counter+1)
+                        let translationZ = (Float(translation.y) * 0.0008) * Float(counter+1)
                         
-                        if let fallingObject = self.fallingObjects[6] {
-                            print("posisibox \(fallingObject.position.y)")
-                            if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.3{
-                                if self.parent.vm.losedata.isLose == false{
-                                    self.hasWon.wrappedValue = true
-                                    self.parent.vm.losedata.isLose = true
+                        plane[counter].position.x = bolla.position.x - translationX
+                        plane[counter].position.y = bolla.position.y + translationY
+                        plane[counter].position.z = bolla.position.z - translationZ
+                        
+                        plane[counter].isEnabled = true
+                        counter += 1
+                    }
+                    let rotationY = Float(translation.x) * 0.0085
+                    rotationAngle = 9.4 + rotationY
+                    let rotation = simd_quatf(angle: rotationAngle, axis: [0, 1, 0])
+                    canon.transform.rotation = rotation
+                    
+                } else if gesture.state == .ended {
+                    for i in 0...2{
+                        plane[i].isEnabled = false
+                    }
+                    if let physicsEntity = bolla as? Entity & HasPhysics {
+                        physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0005, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                        panavailable = false
+                        //                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                            //                        for x in 0..<self.fallingObjects.count {
+                            //                            if let fallingObject = self.fallingObjects[x] {
+                            //                                if x <= 3{
+                            //                                    if fallingObject.position.y < -0.1{
+                            //                                        self.fall += 1
+                            //                                    }
+                            //                                } else if x > 3 && x <= 6 {
+                            //                                    if fallingObject.position.y < 0.02{
+                            //                                        self.fall += 1
+                            //                                    }
+                            //                                }else{
+                            //                                    if fallingObject.position.y < -0.1{
+                            //                                        self.fall += 1
+                            //                                    }
+                            //                                }
+                            //
+                            //                                if self.fall == 8 {
+                            //                                    self.hasWon = true
+                            //                                    print("Congratulations! You win!")
+                            //                                }
+                            //                                print("posisibox \(fallingObject.position.y)")
+                            //                            }
+                            //                        }
+                            print("posisibox \(self.parent.vm.losedata.isLose)")
+                            if let fallingObject = self.fallingObjects[6] {
+                                print("posisibox \(fallingObject.position.y)")
+                                if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.3{
+                                    if self.parent.vm.losedata.isLose == false{
+                                        self.hasWon.wrappedValue = true
+                                        self.parent.vm.losedata.isLose = true
+                                    }
                                 }
                             }
+                            
+                            self.canon.transform.rotation = simd_quatf(angle: 9.4, axis: [0, 1, 0])
+                            
+                            self.bolla.removeFromParent()
+                            let modelBola = try! ModelFix.loadBola()
+                            self.bolla = modelBola.bolla
+                            self.anchorEntity.addChild(self.bolla)
+                            self.panavailable = true
                         }
                         
-                        
-                        
-                        self.bolla.removeFromParent()
-                        let modelBola = try! ModelFix.loadBola()
-                        self.bolla = modelBola.bolla
-                        self.anchorEntity.addChild(self.bolla)
                     }
-                    
                 }
             }
         }

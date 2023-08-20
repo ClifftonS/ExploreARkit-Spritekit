@@ -38,5 +38,20 @@
     "libraryIdentifier" : "20ba09d4ae7063e8a688b64230a993a1",
     "format" : "model",
     "displayName" : "plank.usdz"
+  },
+  {
+    "libraryIdentifier" : "c67c000279ae5ba858c46156e44819e8",
+    "format" : "model",
+    "displayName" : "medCube.usdz"
+  },
+  {
+    "libraryIdentifier" : "34057ad89af7881b1d2dd46558943d00",
+    "format" : "model",
+    "displayName" : "smallCube.usdz"
+  },
+  {
+    "libraryIdentifier" : "7e3d6755f2988e7ee7e400bf32988724",
+    "format" : "model",
+    "displayName" : "Cannon 3D.usdz"
   }
 ]
