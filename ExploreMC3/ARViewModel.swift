@@ -14,12 +14,14 @@ class ARViewModel: ObservableObject {
     @Published var arView: ARView!
     @Published var multipeerSession: MultipeerSession?
     @Published var sessionIDObservation: NSKeyValueObservation?
+    @Published var losedata: LoseData
     
     // A dictionary to map MultiPeer IDs to ARSession ID's.
     // This is useful for keeping track of which peer created which ARAnchors.
     var peerSessionIDs = [MCPeerID: String]()
     
     init() {
+        self.losedata = LoseData()
         arView = ARView(frame: .zero)
         
         // Turn off ARView's automatically-configured session
@@ -81,6 +83,11 @@ extension ARViewModel {
             arView.session.update(with: collaborationData)
             return
         }
+        if let loseData = try? JSONDecoder().decode(LoseData.self, from: data) {
+                DispatchQueue.main.async {
+                    self.losedata = loseData
+                }
+            }
         // ...
         let sessionIDCommandString = "SessionID:"
         if let commandString = String(data: data, encoding: .utf8), commandString.starts(with: sessionIDCommandString) {

@@ -14,9 +14,18 @@ import AVFoundation
 var audioPlayer : AVAudioPlayer?
 struct ContentView : View {
     @StateObject var vm = ARViewModel()
-
+    @State private var hasWon = false
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all).environmentObject(vm).onAppear(perform: self.playSound)
+        ZStack{
+            ARViewContainer(hasWon: $hasWon).edgesIgnoringSafeArea(.all).environmentObject(vm).onAppear(perform: self.playSound)
+            if hasWon { // Display overlay when hasWon is true
+                CongratulationOverlay()
+            } else{
+                if vm.losedata.isLose == true {
+                    LoseOverlay()
+                }
+            }
+        }
     }
     func playSound(){
           
@@ -36,12 +45,44 @@ struct ContentView : View {
             }
         }
 }
-
+struct CongratulationOverlay: View {
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.5) // Semi-transparent background
+            VStack {
+                Text("Congratulations!")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                Text("You won!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+struct LoseOverlay: View {
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.5) // Semi-transparent background
+            VStack {
+                Text("Oops!")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                Text("You lost!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
 struct ARViewContainer: UIViewRepresentable {
+    @Binding var hasWon: Bool
     @EnvironmentObject var vm: ARViewModel
     typealias UIViewType = ARView
     func makeUIView(context: Context) -> ARView {
-        
+        context.coordinator.hasWon = $hasWon
         vm.arView.session.delegate = context.coordinator
 //        _ = FocusEntity(on: vm.arView, style: .classic(color: .yellow))
                 
@@ -87,9 +128,11 @@ extension ARViewContainer {
         var tapdetected: Bool = false
         var plane = [ModelEntity]()
         var fallingObjects: [Entity?] = []
+        var hasWon: Binding<Bool>
         
-        init(_ parent: ARViewContainer) {
+        init(_ parent: ARViewContainer, hasWon: Binding<Bool>) {
             self.parent = parent
+            self.hasWon = hasWon
         }
                 
         
@@ -130,6 +173,14 @@ extension ARViewContainer {
             } else {
                 print("Deferred sending collaboration to later because there are no peers.")
             }
+            
+            let loseData = self.parent.vm.losedata
+                do {
+                    let loseDataEncoded = try JSONEncoder().encode(loseData)
+                    multipeerSession.sendToAllPeers(loseDataEncoded, reliably: true) // You can adjust reliability as needed
+                } catch let error {
+                    print("Error encoding 'isLost' data: \(error)")
+                }
         }
         func placeSceneObject(named entityName: String, for anchor: ARAnchor){
             let modelEntity = try! ModelFix.loadBox()
@@ -208,12 +259,44 @@ extension ARViewContainer {
                     plane[i].isEnabled = false
                 }
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0004, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
 //                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
-                        for x in 0...7{
-                            print("posisibox \(self.fallingObjects[x+1]?.position.y)")
+//                        for x in 0..<self.fallingObjects.count {
+//                            if let fallingObject = self.fallingObjects[x] {
+//                                if x <= 3{
+//                                    if fallingObject.position.y < -0.1{
+//                                        self.fall += 1
+//                                    }
+//                                } else if x > 3 && x <= 6 {
+//                                    if fallingObject.position.y < 0.02{
+//                                        self.fall += 1
+//                                    }
+//                                }else{
+//                                    if fallingObject.position.y < -0.1{
+//                                        self.fall += 1
+//                                    }
+//                                }
+//
+//                                if self.fall == 8 {
+//                                    self.hasWon = true
+//                                    print("Congratulations! You win!")
+//                                }
+//                                print("posisibox \(fallingObject.position.y)")
+//                            }
+//                        }
+                        
+                        if let fallingObject = self.fallingObjects[6] {
+                            print("posisibox \(self.parent.vm.losedata.isLose)")
+                            if fallingObject.position.y < 0.02{
+                                if self.parent.vm.losedata.isLose == false{
+                                    self.hasWon.wrappedValue = true
+                                    self.parent.vm.losedata.isLose = true
+                                }
+                            }
                         }
+                        
+                        
                         
                         self.bolla.removeFromParent()
                         let modelBola = try! ModelFix.loadBola()
@@ -228,7 +311,7 @@ extension ARViewContainer {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
+        return Coordinator(self, hasWon: $hasWon)
     }
 }
 #if DEBUG
