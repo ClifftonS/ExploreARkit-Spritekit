@@ -242,7 +242,7 @@ extension ARViewContainer {
                 var counter = 0
                 while counter < plane.count{
                     let translationX = (Float(translation.x) * 0.0008) * Float(counter+1)
-                    let translationY = (Float(translation.y) * 0.0001) * Float(counter+1)
+                    let translationY = (Float(translation.y) * 0.00008) * Float(counter+1)
                     let translationZ = (Float(translation.y) * 0.0008) * Float(counter+1)
                     
                     plane[counter].position.x = bolla.position.x - translationX
@@ -259,7 +259,7 @@ extension ARViewContainer {
                     plane[i].isEnabled = false
                 }
                 if let physicsEntity = bolla as? Entity & HasPhysics {
-                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0004, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
+                    physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0005, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
 //                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4){
 //                        for x in 0..<self.fallingObjects.count {
@@ -287,8 +287,8 @@ extension ARViewContainer {
 //                        }
                         
                         if let fallingObject = self.fallingObjects[6] {
-                            print("posisibox \(self.parent.vm.losedata.isLose)")
-                            if fallingObject.position.y < 0.02{
+                            print("posisibox \(fallingObject.position.y)")
+                            if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.3{
                                 if self.parent.vm.losedata.isLose == false{
                                     self.hasWon.wrappedValue = true
                                     self.parent.vm.losedata.isLose = true
