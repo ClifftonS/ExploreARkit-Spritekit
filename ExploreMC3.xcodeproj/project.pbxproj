@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B0A0C072A920A1000167B34 /* smallCube.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C052A920A1000167B34 /* smallCube.usdz */; };
 		0B0A0C082A920A1000167B34 /* medCube.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C062A920A1000167B34 /* medCube.usdz */; };
+		0B0A0C0C2A920AB500167B34 /* Cannon 3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C0B2A920AB500167B34 /* Cannon 3D.usdz */; };
 		0BD776122A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776112A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets */; };
 		0BD776182A8B1B5000A8B9BF /* coconutTree.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */; };
 		0BD7761A2A8B211300A8B9BF /* barrel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776192A8B211300A8B9BF /* barrel.usdz */; };
@@ -18,7 +19,6 @@
 		0BD776232A8B22AC00A8B9BF /* base2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776202A8B22AC00A8B9BF /* base2.usdz */; };
 		0BD776242A8B22AC00A8B9BF /* shortBase.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776212A8B22AC00A8B9BF /* shortBase.usdz */; };
 		0BD776262A8B2A3800A8B9BF /* plank.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776252A8B2A3800A8B9BF /* plank.usdz */; };
-		0BD776282A8C62DB00A8B9BF /* Cannon 3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776272A8C62DB00A8B9BF /* Cannon 3D.usdz */; };
 		4E321C1E2A763D89000B20AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1D2A763D89000B20AB /* AppDelegate.swift */; };
 		4E321C202A763D89000B20AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C1F2A763D89000B20AB /* ContentView.swift */; };
 		4E321C222A763D89000B20AB /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4E321C212A763D89000B20AB /* Experience.rcproject */; };
@@ -29,6 +29,7 @@
 /* Begin PBXFileReference section */
 		0B0A0C052A920A1000167B34 /* smallCube.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = smallCube.usdz; sourceTree = "<group>"; };
 		0B0A0C062A920A1000167B34 /* medCube.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = medCube.usdz; sourceTree = "<group>"; };
+		0B0A0C0B2A920AB500167B34 /* Cannon 3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Cannon 3D.usdz"; sourceTree = "<group>"; };
 		0BD776112A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "SceneKit Asset Catalog.scnassets"; sourceTree = "<group>"; };
 		0BD776152A8B190800A8B9BF /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
 		0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = coconutTree.usdz; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		0BD776202A8B22AC00A8B9BF /* base2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = base2.usdz; sourceTree = "<group>"; };
 		0BD776212A8B22AC00A8B9BF /* shortBase.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shortBase.usdz; sourceTree = "<group>"; };
 		0BD776252A8B2A3800A8B9BF /* plank.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = plank.usdz; sourceTree = "<group>"; };
-		0BD776272A8C62DB00A8B9BF /* Cannon 3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Cannon 3D.usdz"; sourceTree = "<group>"; };
 		4E321C1A2A763D89000B20AB /* ExploreMC3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExploreMC3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E321C1D2A763D89000B20AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E321C1F2A763D89000B20AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				0BD776192A8B211300A8B9BF /* barrel.usdz */,
-				0BD776272A8C62DB00A8B9BF /* Cannon 3D.usdz */,
+				0B0A0C0B2A920AB500167B34 /* Cannon 3D.usdz */,
 				0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */,
 				0BD7761B2A8B21B800A8B9BF /* house.usdz */,
 				0BD776252A8B2A3800A8B9BF /* plank.usdz */,
@@ -174,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B0A0C0C2A920AB500167B34 /* Cannon 3D.usdz in Resources */,
 				0BD7761E2A8B21E800A8B9BF /* island.usdz in Resources */,
 				0BD776242A8B22AC00A8B9BF /* shortBase.usdz in Resources */,
 				0BD776262A8B2A3800A8B9BF /* plank.usdz in Resources */,
@@ -186,7 +187,6 @@
 				0BD7761C2A8B21B800A8B9BF /* house.usdz in Resources */,
 				0BD776122A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
-				0BD776282A8C62DB00A8B9BF /* Cannon 3D.usdz in Resources */,
 				0BD776182A8B1B5000A8B9BF /* coconutTree.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
