@@ -19,6 +19,9 @@
 		4ED473882A8B267900A049C2 /* ModelFix.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4ED473872A8B267900A049C2 /* ModelFix.rcproject */; };
 		4ED473902A8EA60200A049C2 /* stranger.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ED4738F2A8EA60200A049C2 /* stranger.mp3 */; };
 		4ED473922A91D5B000A049C2 /* LoseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED473912A91D5B000A049C2 /* LoseData.swift */; };
+		4ED473962A930F8900A049C2 /* MainView Song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ED473932A930F8800A049C2 /* MainView Song.mp3 */; };
+		4ED473972A930F8900A049C2 /* Collision SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ED473942A930F8900A049C2 /* Collision SFX.mp3 */; };
+		4ED473982A930F8900A049C2 /* Canon Shoot SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4ED473952A930F8900A049C2 /* Canon Shoot SFX.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		4ED473872A8B267900A049C2 /* ModelFix.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = ModelFix.rcproject; sourceTree = "<group>"; };
 		4ED4738F2A8EA60200A049C2 /* stranger.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = stranger.mp3; sourceTree = "<group>"; };
 		4ED473912A91D5B000A049C2 /* LoseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseData.swift; sourceTree = "<group>"; };
+		4ED473932A930F8800A049C2 /* MainView Song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "MainView Song.mp3"; sourceTree = "<group>"; };
+		4ED473942A930F8900A049C2 /* Collision SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Collision SFX.mp3"; sourceTree = "<group>"; };
+		4ED473952A930F8900A049C2 /* Canon Shoot SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Canon Shoot SFX.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,9 @@
 				4E321C362A79F13A000B20AB /* boxtumpuk.rcproject */,
 				4E321C232A763D8B000B20AB /* Assets.xcassets */,
 				4ED4738F2A8EA60200A049C2 /* stranger.mp3 */,
+				4ED473952A930F8900A049C2 /* Canon Shoot SFX.mp3 */,
+				4ED473942A930F8900A049C2 /* Collision SFX.mp3 */,
+				4ED473932A930F8800A049C2 /* MainView Song.mp3 */,
 				4E321C252A763D8B000B20AB /* Preview Content */,
 			);
 			path = ExploreMC3;
@@ -159,6 +168,9 @@
 			files = (
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				4ED473902A8EA60200A049C2 /* stranger.mp3 in Resources */,
+				4ED473962A930F8900A049C2 /* MainView Song.mp3 in Resources */,
+				4ED473972A930F8900A049C2 /* Collision SFX.mp3 in Resources */,
+				4ED473982A930F8900A049C2 /* Canon Shoot SFX.mp3 in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

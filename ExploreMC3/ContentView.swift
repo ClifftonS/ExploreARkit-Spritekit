@@ -30,14 +30,15 @@ struct ContentView : View {
     func playSound(){
           
             //getting the resource path
-            let resourcePath = Bundle.main.url(forResource: "stranger", withExtension: "mp3")
+            let resourcePath = Bundle.main.url(forResource: "MainView Song", withExtension: "mp3")
             
             do{
                 //initializing audio player with the resource path
                 audioPlayer = try AVAudioPlayer(contentsOf: resourcePath!)
+                audioPlayer?.numberOfLoops = -1
                 
                 //play the audio
-//                audioPlayer?.play()
+                audioPlayer?.play()
             }
             catch{
               //error handling
@@ -132,6 +133,7 @@ extension ARViewContainer {
         var hasWon: Binding<Bool>
         var panavailable = true
         var rotationAngle: Float = 180.0
+        var audioPlayer2 : AVAudioPlayer?
         
         init(_ parent: ARViewContainer, hasWon: Binding<Bool>) {
             self.parent = parent
@@ -273,6 +275,16 @@ extension ARViewContainer {
                     if let physicsEntity = bolla as? Entity & HasPhysics {
                         physicsEntity.applyLinearImpulse([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0005, -Float(translation.y) * 0.0008], relativeTo: physicsEntity.parent)
                         panavailable = false
+                        do {
+                            if let resourcePath2 = Bundle.main.url(forResource: "Canon Shoot SFX", withExtension: "mp3") {
+                                audioPlayer2 = try AVAudioPlayer(contentsOf: resourcePath2)
+                                audioPlayer2?.play()
+                            } else {
+                                print("Resource not found.")
+                            }
+                        } catch {
+                            print("Error initializing or playing audio: \(error)")
+                        }
                         //                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
                         DispatchQueue.main.asyncAfter(deadline: .now() + 4){
                             //                        for x in 0..<self.fallingObjects.count {
@@ -301,7 +313,7 @@ extension ARViewContainer {
                             print("posisibox \(self.parent.vm.losedata.isLose)")
                             if let fallingObject = self.fallingObjects[6] {
                                 print("posisibox \(fallingObject.position.y)")
-                                if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.05{
+                                if fallingObject.position.y < 0.013 || fallingObject.position.y > 0.05{
                                     if self.parent.vm.losedata.isLose == false{
                                         self.hasWon.wrappedValue = true
                                         self.parent.vm.losedata.isLose = true
