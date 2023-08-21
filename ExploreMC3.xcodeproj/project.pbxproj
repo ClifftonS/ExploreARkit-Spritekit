@@ -10,6 +10,9 @@
 		0B0A0C072A920A1000167B34 /* smallCube.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C052A920A1000167B34 /* smallCube.usdz */; };
 		0B0A0C082A920A1000167B34 /* medCube.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C062A920A1000167B34 /* medCube.usdz */; };
 		0B0A0C0C2A920AB500167B34 /* Cannon 3D.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C0B2A920AB500167B34 /* Cannon 3D.usdz */; };
+		0B0A0C102A930E1500167B34 /* Collision SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C0D2A930E1500167B34 /* Collision SFX.mp3 */; };
+		0B0A0C112A930E1500167B34 /* Canon Shoot SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C0E2A930E1500167B34 /* Canon Shoot SFX.mp3 */; };
+		0B0A0C122A930E1500167B34 /* MainView Song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B0A0C0F2A930E1500167B34 /* MainView Song.mp3 */; };
 		0BD776122A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776112A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets */; };
 		0BD776182A8B1B5000A8B9BF /* coconutTree.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */; };
 		0BD7761A2A8B211300A8B9BF /* barrel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0BD776192A8B211300A8B9BF /* barrel.usdz */; };
@@ -30,6 +33,9 @@
 		0B0A0C052A920A1000167B34 /* smallCube.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = smallCube.usdz; sourceTree = "<group>"; };
 		0B0A0C062A920A1000167B34 /* medCube.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = medCube.usdz; sourceTree = "<group>"; };
 		0B0A0C0B2A920AB500167B34 /* Cannon 3D.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Cannon 3D.usdz"; sourceTree = "<group>"; };
+		0B0A0C0D2A930E1500167B34 /* Collision SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Collision SFX.mp3"; sourceTree = "<group>"; };
+		0B0A0C0E2A930E1500167B34 /* Canon Shoot SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Canon Shoot SFX.mp3"; sourceTree = "<group>"; };
+		0B0A0C0F2A930E1500167B34 /* MainView Song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "MainView Song.mp3"; sourceTree = "<group>"; };
 		0BD776112A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "SceneKit Asset Catalog.scnassets"; sourceTree = "<group>"; };
 		0BD776152A8B190800A8B9BF /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
 		0BD776172A8B1B5000A8B9BF /* coconutTree.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = coconutTree.usdz; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				4E321C262A763D8B000B20AB /* Preview Assets.xcassets */,
+				0B0A0C0E2A930E1500167B34 /* Canon Shoot SFX.mp3 */,
+				0B0A0C0D2A930E1500167B34 /* Collision SFX.mp3 */,
+				0B0A0C0F2A930E1500167B34 /* MainView Song.mp3 */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 				0B0A0C0C2A920AB500167B34 /* Cannon 3D.usdz in Resources */,
 				0BD7761E2A8B21E800A8B9BF /* island.usdz in Resources */,
 				0BD776242A8B22AC00A8B9BF /* shortBase.usdz in Resources */,
+				0B0A0C102A930E1500167B34 /* Collision SFX.mp3 in Resources */,
 				0BD776262A8B2A3800A8B9BF /* plank.usdz in Resources */,
 				0B0A0C082A920A1000167B34 /* medCube.usdz in Resources */,
 				0BD776232A8B22AC00A8B9BF /* base2.usdz in Resources */,
@@ -186,7 +196,9 @@
 				4E321C272A763D8B000B20AB /* Preview Assets.xcassets in Resources */,
 				0BD7761C2A8B21B800A8B9BF /* house.usdz in Resources */,
 				0BD776122A89C34000A8B9BF /* SceneKit Asset Catalog.scnassets in Resources */,
+				0B0A0C122A930E1500167B34 /* MainView Song.mp3 in Resources */,
 				4E321C242A763D8B000B20AB /* Assets.xcassets in Resources */,
+				0B0A0C112A930E1500167B34 /* Canon Shoot SFX.mp3 in Resources */,
 				0BD776182A8B1B5000A8B9BF /* coconutTree.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
