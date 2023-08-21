@@ -179,6 +179,9 @@ extension ARViewContainer {
             
             let loseData = self.parent.vm.losedata
                 do {
+                    if loseData.isLose == true{
+                        print("KALAHHHH2")
+                    }
                     let loseDataEncoded = try JSONEncoder().encode(loseData)
                     multipeerSession.sendToAllPeers(loseDataEncoded, reliably: true) // You can adjust reliability as needed
                 } catch let error {
@@ -196,7 +199,6 @@ extension ARViewContainer {
             }
             canon = modelBola.canon
             bolla = modelBola.bolla
-            print("Posisiputer \(canon.transform.rotation)")
             canon.transform.rotation = simd_quatf(angle: 9.4, axis: [0, 1, 0])
             originalPosition = bolla.position
             anchorEntity = AnchorEntity(plane: .horizontal)
@@ -299,10 +301,17 @@ extension ARViewContainer {
                             print("posisibox \(self.parent.vm.losedata.isLose)")
                             if let fallingObject = self.fallingObjects[6] {
                                 print("posisibox \(fallingObject.position.y)")
-                                if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.3{
+                                if fallingObject.position.y < 0.0 || fallingObject.position.y > 0.05{
                                     if self.parent.vm.losedata.isLose == false{
                                         self.hasWon.wrappedValue = true
                                         self.parent.vm.losedata.isLose = true
+                                        let translation2 = SIMD3<Float>(x: 10, y: 10, z: 10)
+                                        var transform = matrix_identity_float4x4
+                                        transform.columns.3.x = translation2.x
+                                        transform.columns.3.y = translation2.y
+                                        transform.columns.3.z = translation2.z
+                                        let anchor = ARAnchor(name: "ball6", transform: transform)
+                                        self.parent.vm.arView.session.add(anchor: anchor)
                                     }
                                 }
                             }

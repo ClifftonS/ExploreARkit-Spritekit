@@ -86,6 +86,9 @@ extension ARViewModel {
         if let loseData = try? JSONDecoder().decode(LoseData.self, from: data) {
                 DispatchQueue.main.async {
                     self.losedata = loseData
+                    if self.losedata.isLose == true{
+                        print("KALAHHHH")
+                    }
                 }
             }
         // ...
