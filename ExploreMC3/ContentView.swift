@@ -183,9 +183,10 @@ extension ARViewContainer {
                 do {
                     if loseData.isLose == true{
                         print("KALAHHHH2")
+                        let loseDataEncoded = try JSONEncoder().encode(loseData)
+                        multipeerSession.sendToAllPeers(loseDataEncoded, reliably: true) // You can adjust reliability as needed
                     }
-                    let loseDataEncoded = try JSONEncoder().encode(loseData)
-                    multipeerSession.sendToAllPeers(loseDataEncoded, reliably: true) // You can adjust reliability as needed
+                    
                 } catch let error {
                     print("Error encoding 'isLost' data: \(error)")
                 }
@@ -193,7 +194,7 @@ extension ARViewContainer {
         func placeSceneObject(named entityName: String, for anchor: ARAnchor){
             let modelEntity = try! ModelFix.loadBox()
             let modelBola = try! ModelFix.loadBola()
-            for x in 0...7{
+            for x in 0...9{
                 let boxIndex = "box\(x+1)"
                     if let boxModel = modelEntity.findEntity(named: boxIndex) {
                         fallingObjects.append(boxModel)
@@ -206,6 +207,7 @@ extension ARViewContainer {
             anchorEntity = AnchorEntity(plane: .horizontal)
             anchorEntity.addChild(modelEntity)
             anchorEntity.addChild(modelBola)
+            self.parent.vm.arView.environment.lighting.intensityExponent = 2
             self.parent.vm.arView.scene.addAnchor(anchorEntity)
             for _ in 0...2{
                 let planeModel = buildPlane()
@@ -311,23 +313,31 @@ extension ARViewContainer {
                             //                            }
                             //                        }
                             print("posisibox \(self.parent.vm.losedata.isLose)")
+                            var winstate = 0
                             if let fallingObject = self.fallingObjects[6] {
                                 print("posisibox \(fallingObject.position.y)")
                                 if fallingObject.position.y < 0.013 || fallingObject.position.y > 0.05{
-                                    if self.parent.vm.losedata.isLose == false{
-                                        self.hasWon.wrappedValue = true
-                                        self.parent.vm.losedata.isLose = true
-                                        let translation2 = SIMD3<Float>(x: 10, y: 10, z: 10)
-                                        var transform = matrix_identity_float4x4
-                                        transform.columns.3.x = translation2.x
-                                        transform.columns.3.y = translation2.y
-                                        transform.columns.3.z = translation2.z
-                                        let anchor = ARAnchor(name: "ball6", transform: transform)
-                                        self.parent.vm.arView.session.add(anchor: anchor)
-                                    }
+                                    winstate += 1
                                 }
                             }
-                            
+                            if let fallingObject2 = self.fallingObjects[8] {
+                                print("posisibox2 \(fallingObject2.position.y)")
+                                if fallingObject2.position.y < -0.15 || fallingObject2.position.y > 0.01{
+                                    winstate += 1
+                                }
+                            }
+                            if let fallingObject3 = self.fallingObjects[9] {
+                                print("posisibox3 \(fallingObject3.position.y)")
+                                if (fallingObject3.position.y < -0.09 || fallingObject3.position.y > 0.05) && fallingObject3.position.y < 0.4{
+                                    winstate += 1
+                                }
+                            }
+                            if winstate == 3 {
+                                if self.parent.vm.losedata.isLose == false{
+                                    self.hasWon.wrappedValue = true
+                                    self.parent.vm.losedata.isLose = true
+                                }
+                            }
                             self.canon.transform.rotation = simd_quatf(angle: 9.4, axis: [0, 1, 0])
                             
                             self.bolla.removeFromParent()
