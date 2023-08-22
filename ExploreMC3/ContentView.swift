@@ -15,9 +15,22 @@ var audioPlayer : AVAudioPlayer?
 struct ContentView : View {
     @StateObject var vm = ARViewModel()
     @State private var hasWon = false
+    @State private var tapdetected = false
     var body: some View {
         ZStack{
-            ARViewContainer(hasWon: $hasWon).edgesIgnoringSafeArea(.all).environmentObject(vm).onAppear(perform: self.playSound)
+            ARViewContainer(hasWon: $hasWon, tapdetected: $tapdetected).edgesIgnoringSafeArea(.all).environmentObject(vm).onAppear(perform: self.playSound)
+            if !tapdetected{
+                VStack{
+                    Text("Tap anywhere to place object").foregroundColor(.white).bold().offset(y: 20)
+                    Spacer()
+                }
+                
+            } else {
+                VStack{
+                    Text("Drag the canon to shoot").foregroundColor(.white).bold().offset(y: 20)
+                    Spacer()
+                }
+            }
             if hasWon { // Display overlay when hasWon is true
                 CongratulationOverlay()
             } else{
@@ -80,10 +93,12 @@ struct LoseOverlay: View {
 }
 struct ARViewContainer: UIViewRepresentable {
     @Binding var hasWon: Bool
+    @Binding var tapdetected: Bool
     @EnvironmentObject var vm: ARViewModel
     typealias UIViewType = ARView
     func makeUIView(context: Context) -> ARView {
         context.coordinator.hasWon = $hasWon
+        context.coordinator.tapdetected = $tapdetected
         vm.arView.session.delegate = context.coordinator
 //        _ = FocusEntity(on: vm.arView, style: .classic(color: .yellow))
                 
@@ -127,7 +142,7 @@ extension ARViewContainer {
         var canon: Entity!
         var anchorEntity: AnchorEntity!
         var originalPosition: SIMD3<Float>!
-        var tapdetected: Bool = false
+        var tapdetected: Binding<Bool>
         var plane = [ModelEntity]()
         var fallingObjects: [Entity?] = []
         var hasWon: Binding<Bool>
@@ -135,9 +150,10 @@ extension ARViewContainer {
         var rotationAngle: Float = 180.0
         var audioPlayer2 : AVAudioPlayer?
         
-        init(_ parent: ARViewContainer, hasWon: Binding<Bool>) {
+        init(_ parent: ARViewContainer, hasWon: Binding<Bool>, tapdetected: Binding<Bool>) {
             self.parent = parent
             self.hasWon = hasWon
+            self.tapdetected = tapdetected
         }
                 
         
@@ -157,9 +173,9 @@ extension ARViewContainer {
                     self.parent.vm.arView.scene.addAnchor(anchorEntity)
                 } else {
                     if let anchorName = anchor.name, anchorName == "ball5" {
-                        if tapdetected == false{
+                        if tapdetected.wrappedValue == false{
                             self.placeSceneObject(named: anchorName, for: anchor)
-                            tapdetected = true
+                            tapdetected.wrappedValue = true
                         }
                         
                     }
@@ -355,7 +371,7 @@ extension ARViewContainer {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(self, hasWon: $hasWon)
+        return Coordinator(self, hasWon: $hasWon, tapdetected: $tapdetected)
     }
 }
 #if DEBUG
