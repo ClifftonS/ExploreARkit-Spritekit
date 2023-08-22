@@ -288,7 +288,7 @@ extension ARViewContainer {
                             print("Error initializing or playing audio: \(error)")
                         }
                         //                    sendImpulseData([-Float(translation.x) * 0.0008, -Float(translation.y/2) * 0.0008, -Float(translation.y) * 0.0008])
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5){
                             //                        for x in 0..<self.fallingObjects.count {
                             //                            if let fallingObject = self.fallingObjects[x] {
                             //                                if x <= 3{
@@ -316,19 +316,19 @@ extension ARViewContainer {
                             var winstate = 0
                             if let fallingObject = self.fallingObjects[6] {
                                 print("posisibox \(fallingObject.position.y)")
-                                if fallingObject.position.y < 0.013 || fallingObject.position.y > 0.05{
+                                if (fallingObject.position.y < 0.014 || fallingObject.position.y > 0.05) && fallingObject.position.y < 0.53{
                                     winstate += 1
                                 }
                             }
                             if let fallingObject2 = self.fallingObjects[8] {
                                 print("posisibox2 \(fallingObject2.position.y)")
-                                if fallingObject2.position.y < -0.15 || fallingObject2.position.y > 0.01{
+                                if fallingObject2.position.y < -0.16 || fallingObject2.position.y > 0.01{
                                     winstate += 1
                                 }
                             }
                             if let fallingObject3 = self.fallingObjects[9] {
                                 print("posisibox3 \(fallingObject3.position.y)")
-                                if (fallingObject3.position.y < -0.09 || fallingObject3.position.y > 0.05) && fallingObject3.position.y < 0.4{
+                                if (fallingObject3.position.y < 0.012 || fallingObject3.position.y > 0.058) && fallingObject3.position.y < 0.4 && (fallingObject3.position.y < -0.142 || fallingObject3.position.y > -0.1){
                                     winstate += 1
                                 }
                             }
